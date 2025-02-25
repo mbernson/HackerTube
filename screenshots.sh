@@ -30,8 +30,8 @@ rm -rf ./Screenshots.xcresult
 
 echo "Taking screenshots for $destination"
 xcodebuild -quiet \
--project "CCCTube.xcodeproj" \
--scheme "CCCTube" \
+-project "HackerTube.xcodeproj" \
+-scheme "HackerTube" \
 -destination "$destination" \
 -resultBundlePath "./Screenshots.xcresult" \
 -testPlan Screenshots \
