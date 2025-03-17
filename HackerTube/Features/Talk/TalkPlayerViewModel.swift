@@ -13,7 +13,7 @@ import os.log
 @Observable
 @MainActor
 final class TalkPlayerViewModel {
-    var player: AVPlayer?
+    var player = AVPlayer()
 
     var currentRecording: Recording?
 
@@ -22,11 +22,10 @@ final class TalkPlayerViewModel {
         subsystem: Bundle.main.bundleIdentifier!, category: "TalkPlayerViewModel")
 
     func prepareForPlayback(recording: Recording, talk: Talk) async {
-        let item = AVPlayerItem(url: recording.recordingURL)
-        item.externalMetadata = factory.createMetadataItems(for: recording, talk: talk)
+        let playerItem = AVPlayerItem(url: recording.recordingURL)
+        playerItem.externalMetadata = factory.createMetadataItems(for: recording, talk: talk)
 
-        let player = AVPlayer(playerItem: item)
-        self.player = player
+        player.replaceCurrentItem(with: playerItem)
         self.currentRecording = recording
         logger.info(
             "Preparing playback of recording: \(recording.recordingURL.absoluteString, privacy: .public)"
@@ -36,12 +35,11 @@ final class TalkPlayerViewModel {
             let posterImageData = try? await factory.fetchImageData(forURL: imageURL),
             let posterImageMetadata = factory.createArtworkMetadataItem(imageData: posterImageData)
         {
-            item.externalMetadata.append(posterImageMetadata)
+            playerItem.externalMetadata.append(posterImageMetadata)
         }
     }
 
     func preroll() async {
-        guard let player else { return }
         await withCheckedContinuation { continuation in
             _ = player.observe(\.status, options: [.initial, .new]) { player, change in
                 if player.status == .readyToPlay {
@@ -57,10 +55,10 @@ final class TalkPlayerViewModel {
     }
 
     func play() {
-        player?.play()
+        player.play()
     }
 
     func pause() {
-        player?.pause()
+        player.pause()
     }
 }
