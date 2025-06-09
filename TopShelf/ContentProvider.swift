@@ -9,11 +9,11 @@ import CCCApi
 import TVServices
 
 class ContentProvider: TVTopShelfContentProvider {
-    let api: ApiService = .shared
     let factory = TopShelfContentFactory()
 
     override func loadTopShelfContent() async -> TVTopShelfContent? {
         do {
+            let api = await ApiService.shared
             async let recentTalks = api.recentTalks()
             let currentYear = Calendar.current.component(.year, from: .now)
             async let popularTalks = api.popularTalks(in: currentYear)

@@ -7,35 +7,18 @@
 
 import Foundation
 
+@MainActor
+@Observable
 public class ApiService {
     private let session: URLSession
     private let baseURL = URL(string: "https://api.media.ccc.de/public")!
     private let decoder = JSONDecoder()
-    private let iso8601Formatter = ISO8601DateFormatter()
 
     public static let shared = ApiService()
 
-    private init() {
+    public init() {
         session = URLSession(configuration: .default)
-
-        // Format should be: yyyy-MM-dd'T'HH:mm:ss.mmm+hh:mm
-        iso8601Formatter.formatOptions = [
-            .withFullDate, .withFullTime, .withTimeZone,
-            .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone,
-            .withFractionalSeconds,
-        ]
-        iso8601Formatter.timeZone = .autoupdatingCurrent
-
-        decoder.dateDecodingStrategy = .custom { decoder in
-            let container = try decoder.singleValueContainer()
-            let dateString = try container.decode(String.self)
-            if let date = self.iso8601Formatter.date(from: dateString) {
-                return date
-            } else {
-                throw DecodingError.dataCorruptedError(
-                    in: container, debugDescription: "Unable to parse ISO 8601 date")
-            }
-        }
+        decoder.dateDecodingStrategy = .formatted(CustomISO8601DateFormatter())
     }
 
     // MARK: Conferences
