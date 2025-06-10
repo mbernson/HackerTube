@@ -151,15 +151,12 @@ private struct CopyrightView: View {
             case .copyright(let string):
                 Text(string)
             case .unknown:
-                if let link = talk.link {
-                    Text(
-                        "No copyright information encoded in video. Please refer to the schedule of the organizer of \(talk.conferenceTitle) at: \(link)"
-                    )
-                } else {
-                    Text(
-                        "No copyright information encoded in video. Please refer to the website of the organizer of \(talk.conferenceTitle) at: \(talk.conferenceURL)"
-                    )
-                }
+                let title = talk.conferenceTitle
+                let link = talk.link ?? talk.conferenceURL
+                Text(
+                    "No copyright information encoded in video. Please refer to the website of the organizer of \(title) at: \(talk.conferenceURL)",
+                    comment: "A label that is shown when no copyright information is available for a talk."
+                )
             }
         }
         .font(.caption)
