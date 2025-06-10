@@ -31,6 +31,7 @@ jobs:
             -project "${{ env.XCODE_PROJECT }}" \
             -scheme ${{ env.SCHEME }} \
             -testPlan "${{ env.TEST_PLAN }}" \
+            -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
             -destination "platform=${{ env.PLATFORM }},name=${{ env.DEVICE }}" | xcpretty
 
       - name: Upload test result bundle
