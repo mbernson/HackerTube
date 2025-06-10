@@ -7,16 +7,17 @@
 
 import XCTest
 
+@MainActor
 final class HackerTubeUIScreenshotTests: XCTestCase {
     var app: XCUIApplication!
 
-    override func setUp() {
+    override func setUpWithError() throws {
         continueAfterFailure = false
-        app = XCUIApplication()
-        app.launch()
     }
 
     func testRecentTalks() {
+        app = XCUIApplication()
+        app.launch()
         XCTAssertTrue(
             app.otherElements["TalksGrid"].buttons.firstMatch.waitForExistence(timeout: 3.0))
         wait(forTimeInterval: 2.0)  // Give the app some time to load
@@ -24,6 +25,8 @@ final class HackerTubeUIScreenshotTests: XCTestCase {
     }
 
     func testConferences() {
+        app = XCUIApplication()
+        app.launch()
         app.buttons["Conferences"].firstMatch.tap()
         XCTAssertTrue(
             app.otherElements["ConferencesGrid"].buttons.firstMatch.waitForExistence(timeout: 3.0))
@@ -32,6 +35,8 @@ final class HackerTubeUIScreenshotTests: XCTestCase {
     }
 
     func testVideo() {
+        app = XCUIApplication()
+        app.launch()
         let firstTalk = app.otherElements["TalksGrid"].buttons.firstMatch
         XCTAssertTrue(firstTalk.waitForExistence(timeout: 5.0))
         firstTalk.tap()
