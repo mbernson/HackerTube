@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var talk: TalkToPlay?
     @State var error: Error?
+    @Environment(ApiService.self) var api
 
     var body: some View {
         TabView {
@@ -66,7 +67,6 @@ struct ContentView: View {
     }
 
     func openRoute(route: URLRoute) async {
-        let api = ApiService.shared
         do {
             switch route {
             case .openTalk(let id):

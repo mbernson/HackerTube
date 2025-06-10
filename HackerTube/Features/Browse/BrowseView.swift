@@ -28,6 +28,7 @@ struct BrowseView: View {
     @State var talks: [Talk] = []
     @State var isLoading = true
     @State var error: Error?
+    @Environment(ApiService.self) var api
 
     var body: some View {
         NavigationStack {
@@ -73,7 +74,6 @@ struct BrowseView: View {
 
     func refresh() async {
         do {
-            let api = ApiService.shared
             switch query {
             case .recent:
                 talks = try await api.recentTalks()

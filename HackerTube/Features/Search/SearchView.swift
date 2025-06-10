@@ -15,6 +15,7 @@ struct SearchView: View {
     @State var isLoading = false
     @State var error: Error?
     @State var suggestions: [SearchSuggestion] = SearchSuggestion.defaultSuggestions.shuffled()
+    @Environment(ApiService.self) var api
 
     var body: some View {
         NavigationStack {
@@ -94,7 +95,7 @@ struct SearchView: View {
         isLoading = true
         defer { isLoading = false }
         do {
-            results = try await ApiService.shared.searchTalks(query: query)
+            results = try await api.searchTalks(query: query)
         } catch {
             self.error = error
         }

@@ -7,12 +7,14 @@
 
 import AVKit
 import SwiftUI
+import CCCApi
 
 @main
 struct HackerTubeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(ApiService.shared)
                 .onAppear {
                     do {
                         try AVAudioSession.sharedInstance().setCategory(.playback)
