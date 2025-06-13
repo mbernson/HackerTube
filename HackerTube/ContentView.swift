@@ -15,41 +15,21 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            BrowseView(query: .recent)
-                .tabItem {
-                    #if os(tvOS)
-                        Text("Recent")
-                    #else
-                        Label("Recent", systemImage: "clock")
-                    #endif
-                }
+            Tab("Recent", systemImage: "clock") {
+                BrowseView(query: .recent)
+            }
 
-            BrowseView(query: .popular)
-                .tabItem {
-                    #if os(tvOS)
-                        Text("Popular")
-                    #else
-                        Label("Popular", systemImage: "popcorn")
-                    #endif
-                }
+            Tab("Popular", systemImage: "popcorn") {
+                BrowseView(query: .popular)
+            }
 
-            ConferencesView()
-                .tabItem {
-                    #if os(tvOS)
-                        Text("Conferences")
-                    #else
-                        Label("Conferences", systemImage: "star")
-                    #endif
-                }
+            Tab("Conferences", systemImage: "star") {
+                ConferencesView()
+            }
 
-            SearchView()
-                .tabItem {
-                    #if os(tvOS)
-                        Label("Search", systemImage: "magnifyingglass").labelStyle(.iconOnly)
-                    #else
-                        Label("Search", systemImage: "magnifyingglass")
-                    #endif
-                }
+            Tab("Search", systemImage: "magnifyingglass", role: .search) {
+                SearchView()
+            }
         }
         .alert("Failed to load data from the media.ccc.de API", error: $error)
         .fullScreenCover(item: $talk) { talk in
