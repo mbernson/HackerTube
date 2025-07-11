@@ -152,7 +152,6 @@ private struct CopyrightView: View {
                 Text(string)
             case .unknown:
                 let title = talk.conferenceTitle
-                let link = talk.link ?? talk.conferenceURL
                 Text(
                     "No copyright information encoded in video. Please refer to the website of the organizer of \(title) at: \(talk.conferenceURL)",
                     comment: "A label that is shown when no copyright information is available for a talk."
