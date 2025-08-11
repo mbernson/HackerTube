@@ -58,6 +58,18 @@ class VideoPlayerCoordinator: NSObject, AVPlayerViewControllerDelegate {
 }
 
 class VideoPlayerViewController: AVPlayerViewController {
+    private var selectedSpeedObserver: NSKeyValueObservation?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        selectedSpeedObserver = self.observe(\.selectedSpeed, options: [.new]) { controller, change in
+            if let selectedSpeed = change.newValue.flatMap({ $0 }) {
+                UserDefaults.standard.set(selectedSpeed.rate, forKey: UserDefaultsKey.playbackRate.rawValue)
+            }
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
