@@ -22,6 +22,8 @@ final class TalkPlayerViewModel {
         subsystem: Bundle.main.bundleIdentifier!, category: "TalkPlayerViewModel")
 
     func prepareForPlayback(recording: Recording, talk: Talk) async {
+        player.defaultRate = UserDefaults.standard.float(forKey: UserDefaultsKey.playbackRate.rawValue)
+
         let playerItem = AVPlayerItem(url: recording.recordingURL)
         playerItem.externalMetadata = factory.createMetadataItems(for: recording, talk: talk)
 

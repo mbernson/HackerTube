@@ -11,6 +11,8 @@ import CCCApi
 
 @main
 struct HackerTubeApp: App {
+    @UIApplicationDelegateAdaptor var appDelegate: HackerTubeAppDelegate
+
     var body: some Scene {
         WindowGroup {
             ContentView()
