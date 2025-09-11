@@ -19,12 +19,12 @@ struct ConferencesView: View {
         NavigationStack {
             ScrollView {
                 let filterQuery = filterQuery.lowercased()
-                ConferencesGrid(
-                    conferences: filterQuery.isEmpty
-                        ? conferences
-                        : conferences.filter { conference in
-                            conference.title.lowercased().contains(filterQuery)
-                        })
+                let conferences: [Conference] = filterQuery.isEmpty
+                ? conferences
+                : conferences.filter { conference in
+                    conference.title.lowercased().contains(filterQuery)
+                }
+                ConferencesGrid(conferences: conferences)
             }
             .overlay {
                 if isLoading {
@@ -65,45 +65,6 @@ struct ConferencesView: View {
     }
 }
 
-struct ConferencesGrid: View {
-    let conferences: [Conference]
-
-    #if os(tvOS)
-        let columns: [GridItem] = Array(repeating: GridItem(), count: 4)
-    #else
-        let columns: [GridItem] = Array(
-            repeating: GridItem(.adaptive(minimum: 200, maximum: 400)),
-            count: 2)
-    #endif
-
-    var body: some View {
-        LazyVGrid(columns: columns) {
-            ForEach(conferences) { conference in
-                NavigationLink {
-                    ConferenceView(conference: conference)
-                } label: {
-                    ConferenceCell(conference: conference)
-                        #if os(visionOS)
-                            .padding()
-                            .contentShape(RoundedRectangle(cornerRadius: 16))
-                            .hoverEffect(.lift)
-                        #endif
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .padding()
-        #if os(tvOS)
-            .focusSection()
-            .buttonStyle(.card)
-        #endif
-        .accessibilityIdentifier("ConferencesGrid")
-        .accessibilityElement(children: .contain)
-    }
-}
-
-struct ConferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConferencesView()
-    }
+#Preview {
+    ConferencesView()
 }

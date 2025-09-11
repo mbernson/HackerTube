@@ -34,7 +34,6 @@ struct ConferenceThumbnail: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .aspectRatio(16 / 9, contentMode: .fit)
         .background(.regularMaterial)
-        .cornerRadius(16)
         .id(id)
     }
 }

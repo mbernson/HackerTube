@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		D59139412895851300369402 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59139402895851300369402 /* TVServices.framework */; };
 		D59139482895851300369402 /* TopShelf.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D591393F2895851300369402 /* TopShelf.appex */; platformFilters = (tvos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D591394E2895854100369402 /* CCCApi in Frameworks */ = {isa = PBXBuildFile; productRef = D591394D2895854100369402 /* CCCApi */; };
+		D5F872252DFC3F3F002D2F28 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = D5F872242DFC3F35002D2F28 /* AppIcon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,14 +41,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		D59139492895851300369402 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 				D59139482895851300369402 /* TopShelf.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -61,6 +60,7 @@
 		D5D2CB292D43EBB300E08E44 /* Screenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Screenshots.xctestplan; sourceTree = "<group>"; };
 		D5D2CB2A2D43EBB300E08E44 /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		D5EFB19C2B407683008CFE82 /* HackerTubeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerTubeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5F872242DFC3F35002D2F28 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -112,34 +112,26 @@
 /* Begin PBXFrameworksBuildPhase section */
 		D591393C2895851300369402 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D59139412895851300369402 /* TVServices.framework in Frameworks */,
 				D591394E2895854100369402 /* CCCApi in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D591395628958B2600369402 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5A156D1289462B3006989FF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D50C6F7628956DFC0003D1D0 /* CCCApi in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5EFB1992B407683008CFE82 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -157,6 +149,7 @@
 			children = (
 				D557E8BA2896F70400342EE2 /* README.md */,
 				D5D2CB292D43EBB300E08E44 /* Screenshots.xctestplan */,
+				D5F872242DFC3F35002D2F28 /* AppIcon.icon */,
 				D5D2CB2A2D43EBB300E08E44 /* UnitTests.xctestplan */,
 				D5AFD6D92C9BFCF700BF89F5 /* HackerTube */,
 				D50C6F7328956D770003D1D0 /* CCCApi */,
@@ -193,8 +186,6 @@
 				D591393D2895851300369402 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				D5AFD6FB2C9BFCFB00BF89F5 /* TopShelf */,
@@ -282,7 +273,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					D591393E2895851300369402 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -310,7 +301,7 @@
 				de,
 			);
 			mainGroup = D5A156CB289462B3006989FF;
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = D5A156D5289462B3006989FF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -326,62 +317,47 @@
 /* Begin PBXResourcesBuildPhase section */
 		D591393D2895851300369402 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D591395728958B2600369402 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5A156D2289462B3006989FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				D5F872252DFC3F3F002D2F28 /* AppIcon.icon in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5EFB19A2B407683008CFE82 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D591393B2895851300369402 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D591395528958B2600369402 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5A156D0289462B3006989FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D5EFB1982B407683008CFE82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -407,12 +383,11 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		D591394A2895851300369402 /* Debug */ = {
+		D591394A2895851300369402 /* Debug configuration for PBXNativeTarget "TopShelf" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TopShelf;
@@ -422,22 +397,20 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTube.TopShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Debug;
 		};
-		D591394B2895851300369402 /* Release */ = {
+		D591394B2895851300369402 /* Release configuration for PBXNativeTarget "TopShelf" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TopShelf;
@@ -447,25 +420,23 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTube.TopShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Release;
 		};
-		D591396028958B2600369402 /* Debug */ = {
+		D591396028958B2600369402 /* Debug configuration for PBXNativeTarget "HackerTubeTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTubeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
@@ -473,19 +444,18 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HackerTube.app/HackerTube";
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Debug;
 		};
-		D591396128958B2600369402 /* Release */ = {
+		D591396128958B2600369402 /* Release configuration for PBXNativeTarget "HackerTubeTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTubeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
@@ -493,11 +463,11 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HackerTube.app/HackerTube";
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Release;
 		};
-		D5A156E0289462B3006989FF /* Debug */ = {
+		D5A156E0289462B3006989FF /* Debug configuration for PBXProject "HackerTube" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -533,6 +503,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3W68UU92K3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -556,13 +527,14 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		D5A156E1289462B3006989FF /* Release */ = {
+		D5A156E1289462B3006989FF /* Release configuration for PBXProject "HackerTube" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -598,6 +570,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3W68UU92K3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -614,6 +587,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 6.0;
@@ -621,21 +595,21 @@
 			};
 			name = Release;
 		};
-		D5A156E3289462B3006989FF /* Debug */ = {
+		D5A156E3289462B3006989FF /* Debug configuration for PBXNativeTarget "HackerTube" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=*]" = AppIcon_iOS;
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = AppIcon_tvOS;
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=xros*]" = AppIcon_visionOS;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=*]" = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletv*]" = AppIcon_tvOS;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HackerTube/HackerTube.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"HackerTube/Preview Content\"";
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				ENABLE_APP_SANDBOX = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HackerTube/Info.plist;
@@ -646,12 +620,12 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				MERGED_BINARY_TYPE = automatic;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -661,26 +635,26 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,3,6,7";
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		D5A156E4289462B3006989FF /* Release */ = {
+		D5A156E4289462B3006989FF /* Release configuration for PBXNativeTarget "HackerTube" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=*]" = AppIcon_iOS;
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = AppIcon_tvOS;
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=xros*]" = AppIcon_visionOS;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=*]" = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletv*]" = AppIcon_tvOS;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = HackerTube/HackerTube.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"HackerTube/Preview Content\"";
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				ENABLE_APP_SANDBOX = YES;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HackerTube/Info.plist;
@@ -691,12 +665,12 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				MERGED_BINARY_TYPE = automatic;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -706,22 +680,21 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,3,6,7";
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		D5EFB1A42B407683008CFE82 /* Debug */ = {
+		D5EFB1A42B407683008CFE82 /* Debug configuration for PBXNativeTarget "HackerTubeUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTubeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -731,21 +704,20 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
 				TEST_TARGET_NAME = HackerTube;
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Debug;
 		};
-		D5EFB1A52B407683008CFE82 /* Release */ = {
+		D5EFB1A52B407683008CFE82 /* Release configuration for PBXNativeTarget "HackerTubeUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3W68UU92K3;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTubeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -754,7 +726,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2,3";
 				TEST_TARGET_NAME = HackerTube;
-				TVOS_DEPLOYMENT_TARGET = 17.6;
+				TVOS_DEPLOYMENT_TARGET = 18.6;
 			};
 			name = Release;
 		};
@@ -764,46 +736,41 @@
 		D591394C2895851300369402 /* Build configuration list for PBXNativeTarget "TopShelf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D591394A2895851300369402 /* Debug */,
-				D591394B2895851300369402 /* Release */,
+				D591394A2895851300369402 /* Debug configuration for PBXNativeTarget "TopShelf" */,
+				D591394B2895851300369402 /* Release configuration for PBXNativeTarget "TopShelf" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D591395F28958B2600369402 /* Build configuration list for PBXNativeTarget "HackerTubeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D591396028958B2600369402 /* Debug */,
-				D591396128958B2600369402 /* Release */,
+				D591396028958B2600369402 /* Debug configuration for PBXNativeTarget "HackerTubeTests" */,
+				D591396128958B2600369402 /* Release configuration for PBXNativeTarget "HackerTubeTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D5A156CF289462B3006989FF /* Build configuration list for PBXProject "HackerTube" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D5A156E0289462B3006989FF /* Debug */,
-				D5A156E1289462B3006989FF /* Release */,
+				D5A156E0289462B3006989FF /* Debug configuration for PBXProject "HackerTube" */,
+				D5A156E1289462B3006989FF /* Release configuration for PBXProject "HackerTube" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D5A156E2289462B3006989FF /* Build configuration list for PBXNativeTarget "HackerTube" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D5A156E3289462B3006989FF /* Debug */,
-				D5A156E4289462B3006989FF /* Release */,
+				D5A156E3289462B3006989FF /* Debug configuration for PBXNativeTarget "HackerTube" */,
+				D5A156E4289462B3006989FF /* Release configuration for PBXNativeTarget "HackerTube" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D5EFB1A62B407683008CFE82 /* Build configuration list for PBXNativeTarget "HackerTubeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D5EFB1A42B407683008CFE82 /* Debug */,
-				D5EFB1A52B407683008CFE82 /* Release */,
+				D5EFB1A42B407683008CFE82 /* Debug configuration for PBXNativeTarget "HackerTubeUITests" */,
+				D5EFB1A52B407683008CFE82 /* Release configuration for PBXNativeTarget "HackerTubeUITests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

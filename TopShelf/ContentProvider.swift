@@ -6,7 +6,7 @@
 //
 
 import CCCApi
-import TVServices
+@preconcurrency import TVServices
 
 class ContentProvider: TVTopShelfContentProvider {
     let factory = TopShelfContentFactory()

@@ -59,8 +59,6 @@ struct TalkListItem: View {
     }
 }
 
-struct TalkListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        TalkListItem(talk: .example)
-    }
+#Preview {
+    TalkListItem(talk: .example)
 }

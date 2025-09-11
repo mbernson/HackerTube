@@ -68,8 +68,6 @@ struct ConferenceView: View {
     }
 }
 
-struct ConferenceView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConferenceView(conference: .example)
-    }
+#Preview {
+    ConferenceView(conference: .example)
 }

@@ -151,15 +151,11 @@ private struct CopyrightView: View {
             case .copyright(let string):
                 Text(string)
             case .unknown:
-                if let link = talk.link {
-                    Text(
-                        "No copyright information encoded in video. Please refer to the schedule of the organizer of \(talk.conferenceTitle) at: \(link)"
-                    )
-                } else {
-                    Text(
-                        "No copyright information encoded in video. Please refer to the website of the organizer of \(talk.conferenceTitle) at: \(talk.conferenceURL)"
-                    )
-                }
+                let title = talk.conferenceTitle
+                Text(
+                    "No copyright information encoded in video. Please refer to the website of the organizer of \(title) at: \(talk.conferenceURL)",
+                    comment: "A label that is shown when no copyright information is available for a talk."
+                )
             }
         }
         .font(.caption)
@@ -205,22 +201,13 @@ private struct TalkDescriptionView: View {
                 #endif
             }
             .sheet(item: $talkDescription) { talkDescription in
+                #if os(tvOS)
+                TalkDescriptionSheetView(talk: talk, description: talkDescription.text)
+                #else
                 NavigationStack {
-                    ScrollView {
-                        Text(talkDescription.text)
-                            .font(.body)
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                    }
-                    .navigationTitle(talk.title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Done", role: .cancel) {
-                                self.talkDescription = nil
-                            }
-                        }
-                    }
+                    TalkDescriptionSheetView(talk: talk, description: talkDescription.text)
                 }
+                #endif
             }
         } else {
             Text(description)
@@ -230,6 +217,29 @@ private struct TalkDescriptionView: View {
 
     func presentTalkDescription() {
         talkDescription = TalkDescription(text: description)
+    }
+}
+
+private struct TalkDescriptionSheetView: View {
+    let talk: Talk
+    let description: String
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        ScrollView {
+            Text(description)
+                .font(.body)
+                .multilineTextAlignment(.leading)
+                .padding()
+        }
+        .navigationTitle(talk.title)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Done", role: .cancel) {
+                    dismiss()
+                }
+            }
+        }
     }
 }
 

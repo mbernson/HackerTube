@@ -1,38 +1,38 @@
 //
-//  TalksGrid.swift
+//  ConferencesGrid.swift
 //  HackerTube
 //
-//  Created by Mathijs Bernson on 27/06/2023.
+//  Created by Mathijs Bernson on 11/09/2025.
 //
 
 import CCCApi
 import SwiftUI
 
-struct TalksGrid: View {
-    let talks: [Talk]
+struct ConferencesGrid: View {
+    let conferences: [Conference]
     var body: some View {
         #if os(tvOS)
-            TalksGridTV(talks: talks)
+            ConferencesGridTV(conferences: conferences)
         #else
-            TalksGridRegular(talks: talks)
+            ConferencesGridRegular(conferences: conferences)
         #endif
     }
 }
 
 #if os(iOS)
-private struct TalksGridRegular: View {
-    let talks: [Talk]
+private struct ConferencesGridRegular: View {
+    let conferences: [Conference]
     let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 240), spacing: 16)
     ]
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
-            ForEach(talks) { talk in
+            ForEach(conferences) { conference in
                 NavigationLink {
-                    TalkView(talk: talk)
+                    ConferenceView(conference: conference)
                 } label: {
-                    TalkCell(talk: talk)
+                    ConferenceCell(conference: conference)
                         #if os(visionOS)
                             .padding()
                             .contentShape(RoundedRectangle(cornerRadius: 16))
@@ -44,46 +44,46 @@ private struct TalksGridRegular: View {
         }
         .padding()
         .multilineTextAlignment(.center)
-        .accessibilityIdentifier("TalksGrid")
+        .accessibilityIdentifier("ConferencesGrid")
         .accessibilityElement(children: .contain)
     }
 }
 #endif
 
 #if os(tvOS)
-    private struct TalksGridTV: View {
-        let talks: [Talk]
+    private struct ConferencesGridTV: View {
+        let conferences: [Conference]
         let columns: [GridItem] = Array(
-            repeating: GridItem(.flexible(minimum: 320), spacing: 48),
+            repeating: GridItem(.flexible(minimum: 300), spacing: 48),
             count: 4
         )
 
         var body: some View {
             LazyVGrid(columns: columns, spacing: 64) {
-                ForEach(talks) { talk in
-                    VStack(alignment: .leading) {
+                ForEach(conferences) { conference in
+                    VStack {
                         NavigationLink {
-                            TalkView(talk: talk)
+                            ConferenceView(conference: conference)
                         } label: {
-                            TalkThumbnail(talk: talk)
+                            ConferenceThumbnail(conference: conference)
                         }
 
-                        Text(talk.title)
+                        Text(conference.title)
                             .font(.headline)
                             .lineLimit(2, reservesSpace: true)
                     }
                 }
             }
             .padding()
-            .multilineTextAlignment(.leading)
+            .multilineTextAlignment(.center)
             .focusSection()
             .buttonStyle(.card)
-            .accessibilityIdentifier("TalksGrid")
+            .accessibilityIdentifier("ConferencesGrid")
             .accessibilityElement(children: .contain)
         }
     }
 #endif
 
 #Preview {
-    TalksGrid(talks: [.example])
+    ConferencesGrid(conferences: [.example])
 }
