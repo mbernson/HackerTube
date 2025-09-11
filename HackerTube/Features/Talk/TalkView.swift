@@ -70,8 +70,7 @@ private struct TVPlayerView: View {
                         .foregroundColor(.white)
                         .shadow(color: .black, radius: 20)
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 24))
-                .contentShape(RoundedRectangle(cornerRadius: 24))
+                .contentShape(Rectangle())
                 .hoverEffect()
         }
         #if !os(tvOS)
@@ -201,22 +200,13 @@ private struct TalkDescriptionView: View {
                 #endif
             }
             .sheet(item: $talkDescription) { talkDescription in
+                #if os(tvOS)
+                TalkDescriptionSheetView(talk: talk, description: talkDescription.text)
+                #else
                 NavigationStack {
-                    ScrollView {
-                        Text(talkDescription.text)
-                            .font(.body)
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                    }
-                    .navigationTitle(talk.title)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Done", role: .cancel) {
-                                self.talkDescription = nil
-                            }
-                        }
-                    }
+                    TalkDescriptionSheetView(talk: talk, description: talkDescription.text)
                 }
+                #endif
             }
         } else {
             Text(description)
@@ -226,6 +216,29 @@ private struct TalkDescriptionView: View {
 
     func presentTalkDescription() {
         talkDescription = TalkDescription(text: description)
+    }
+}
+
+private struct TalkDescriptionSheetView: View {
+    let talk: Talk
+    let description: String
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        ScrollView {
+            Text(description)
+                .font(.body)
+                .multilineTextAlignment(.leading)
+                .padding()
+        }
+        .navigationTitle(talk.title)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Done", role: .cancel) {
+                    dismiss()
+                }
+            }
+        }
     }
 }
 
