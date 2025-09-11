@@ -70,7 +70,7 @@ private struct TVPlayerView: View {
                         .foregroundColor(.white)
                         .shadow(color: .black, radius: 20)
                 }
-                .contentShape(Rectangle())
+                .contentShape(RoundedRectangle(cornerRadius: 16))
                 .hoverEffect()
         }
         #if !os(tvOS)

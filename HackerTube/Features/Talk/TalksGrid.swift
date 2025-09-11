@@ -21,10 +21,12 @@ struct TalksGrid: View {
 
 private struct TalksGridRegular: View {
     let talks: [Talk]
-    let columns: [GridItem] = [GridItem(.adaptive(minimum: 200, maximum: 400))]
+    let columns: [GridItem] = [
+        GridItem(.adaptive(minimum: 240), spacing: 16)
+    ]
 
     var body: some View {
-        LazyVGrid(columns: columns) {
+        LazyVGrid(columns: columns, spacing: 16) {
             ForEach(talks) { talk in
                 NavigationLink {
                     TalkView(talk: talk)
@@ -32,7 +34,7 @@ private struct TalksGridRegular: View {
                     TalkCell(talk: talk)
                         #if os(visionOS)
                             .padding()
-                            .contentShape(Rectangle())
+                            .contentShape(RoundedRectangle(cornerRadius: 16))
                             .hoverEffect(.lift)
                         #endif
                 }
@@ -49,10 +51,13 @@ private struct TalksGridRegular: View {
 #if os(tvOS)
     private struct TalksGridTV: View {
         let talks: [Talk]
-        let columns: [GridItem] = Array(repeating: GridItem(), count: 4)
+        let columns: [GridItem] = Array(
+            repeating: GridItem(.flexible(minimum: 320), spacing: 48),
+            count: 4
+        )
 
         var body: some View {
-            LazyVGrid(columns: columns, spacing: 80) {
+            LazyVGrid(columns: columns, spacing: 64) {
                 ForEach(talks) { talk in
                     VStack(alignment: .leading) {
                         NavigationLink {
@@ -68,7 +73,7 @@ private struct TalksGridRegular: View {
                 }
             }
             .padding()
-            .multilineTextAlignment(.center)
+            .multilineTextAlignment(.leading)
             .focusSection()
             .buttonStyle(.card)
             .accessibilityIdentifier("TalksGrid")

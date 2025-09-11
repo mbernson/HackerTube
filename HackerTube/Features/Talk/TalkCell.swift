@@ -11,6 +11,16 @@ import SwiftUI
 struct TalkCell: View {
     let talk: Talk
 
+    var subtitle: Text {
+        Text(talk.conferenceTitle) +
+        Text(verbatim: " • ") +
+        Text("\(talk.viewCount) views") +
+        Text(verbatim: " • ") +
+        Text(talk.releaseDate ?? talk.updatedAt, format: .relative(presentation: .named))
+    }
+
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
     var body: some View {
         VStack {
             TalkThumbnail(talk: talk)
@@ -18,16 +28,14 @@ struct TalkCell: View {
             VStack(alignment: .leading) {
                 Text(talk.title)
                     .font(.headline)
-                    .lineLimit(1)
+                    .lineLimit(2, reservesSpace: horizontalSizeClass == .regular ? true : false)
 
-                (Text(talk.conferenceTitle) + Text(verbatim: " • ")
-                    + Text("\(talk.viewCount) views") + Text(verbatim: " • ")
-                    + Text(
-                        talk.releaseDate ?? talk.updatedAt, format: .relative(presentation: .named)))
+                subtitle
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
             }
+            .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .tint(.black)

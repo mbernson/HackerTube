@@ -21,12 +21,12 @@ struct ConferencesGrid: View {
 
 private struct ConferencesGridRegular: View {
     let conferences: [Conference]
-    let columns: [GridItem] = Array(
-        repeating: GridItem(.adaptive(minimum: 200, maximum: 400)),
-        count: 2)
+    let columns: [GridItem] = [
+        GridItem(.adaptive(minimum: 240), spacing: 16)
+    ]
 
     var body: some View {
-        LazyVGrid(columns: columns) {
+        LazyVGrid(columns: columns, spacing: 16) {
             ForEach(conferences) { conference in
                 NavigationLink {
                     ConferenceView(conference: conference)
@@ -34,7 +34,7 @@ private struct ConferencesGridRegular: View {
                     ConferenceCell(conference: conference)
                         #if os(visionOS)
                             .padding()
-                            .contentShape(Rectangle())
+                            .contentShape(RoundedRectangle(cornerRadius: 16))
                             .hoverEffect(.lift)
                         #endif
                 }
@@ -51,12 +51,15 @@ private struct ConferencesGridRegular: View {
 #if os(tvOS)
     private struct ConferencesGridTV: View {
         let conferences: [Conference]
-        let columns: [GridItem] = Array(repeating: GridItem(), count: 4)
+        let columns: [GridItem] = Array(
+            repeating: GridItem(.flexible(minimum: 300), spacing: 48),
+            count: 4
+        )
 
         var body: some View {
-            LazyVGrid(columns: columns, spacing: 80) {
+            LazyVGrid(columns: columns, spacing: 64) {
                 ForEach(conferences) { conference in
-                    VStack(alignment: .leading) {
+                    VStack {
                         NavigationLink {
                             ConferenceView(conference: conference)
                         } label: {

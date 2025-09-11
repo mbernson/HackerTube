@@ -44,9 +44,11 @@ struct BrowseView: View {
             .toolbar {
                 #if !os(tvOS)
                     if query == .popular {
+                        #if !os(visionOS) // Sigh...
                         if #available(iOS 26.0, *) {
                             ToolbarSpacer(.flexible, placement: .topBarTrailing)
                         }
+                        #endif
 
                         ToolbarItem(placement: .topBarTrailing) {
                             YearPicker(year: $year)
