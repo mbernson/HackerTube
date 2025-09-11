@@ -65,8 +65,6 @@ struct ConferencesView: View {
     }
 }
 
-struct ConferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConferencesView()
-    }
+#Preview {
+    ConferencesView()
 }

@@ -72,8 +72,6 @@ private struct TalkToPlay: Identifiable {
     let recordingToPlay: Recording?
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

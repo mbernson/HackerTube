@@ -77,8 +77,6 @@ private struct TalksGridRegular: View {
     }
 #endif
 
-struct TalksGrid_Previews: PreviewProvider {
-    static var previews: some View {
-        TalksGrid(talks: [.example])
-    }
+#Preview {
+    TalksGrid(talks: [.example])
 }

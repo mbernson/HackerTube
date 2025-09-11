@@ -272,10 +272,8 @@ private struct TalkMetaView: View {
     }
 }
 
-struct TalkView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            TalkView(talk: .example)
-        }
+#Preview {
+    NavigationStack {
+        TalkView(talk: .example)
     }
 }

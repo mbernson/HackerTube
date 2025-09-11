@@ -79,8 +79,6 @@ private struct ConferencesGridRegular: View {
     }
 #endif
 
-struct ConferencesGrid_Previews: PreviewProvider {
-    static var previews: some View {
-        ConferencesGrid(conferences: [.example])
-    }
+#Preview {
+    ConferencesGrid(conferences: [.example])
 }

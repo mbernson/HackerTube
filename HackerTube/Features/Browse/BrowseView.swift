@@ -109,8 +109,6 @@ struct YearPicker: View {
     }
 }
 
-struct BrowseView_Previews: PreviewProvider {
-    static var previews: some View {
-        BrowseView(query: .popular, talks: [.example])
-    }
+#Preview {
+    BrowseView(query: .popular, talks: [.example])
 }
