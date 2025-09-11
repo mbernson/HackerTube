@@ -8,6 +8,7 @@
 import CCCApi
 import SwiftUI
 
+#if os(iOS)
 struct TalkCell: View {
     let talk: Talk
 
@@ -23,7 +24,15 @@ struct TalkCell: View {
 
     var body: some View {
         VStack {
-            TalkThumbnail(talk: talk)
+            if #available(iOS 26.0, *) {
+                TalkThumbnail(talk: talk)
+                    .clipShape(ConcentricRectangle(
+                        corners: .concentric,
+                        isUniform: true
+                    ))
+            } else {
+                TalkThumbnail(talk: talk)
+            }
 
             VStack(alignment: .leading) {
                 Text(talk.title)
@@ -39,6 +48,7 @@ struct TalkCell: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .tint(.black)
+        .containerShape(.rect(cornerRadius: 24))
     }
 }
 
@@ -50,3 +60,4 @@ struct TalkCell: View {
     .border(.blue)
     .padding()
 }
+#endif

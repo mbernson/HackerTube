@@ -70,7 +70,8 @@ private struct TVPlayerView: View {
                         .foregroundColor(.white)
                         .shadow(color: .black, radius: 20)
                 }
-                .contentShape(RoundedRectangle(cornerRadius: 16))
+                .clipShape(RoundedRectangle(cornerRadius: 24))
+                .contentShape(RoundedRectangle(cornerRadius: 24))
                 .hoverEffect()
         }
         #if !os(tvOS)
@@ -272,8 +273,10 @@ private struct TalkMetaView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        TalkView(talk: .example)
+struct TalkView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            TalkView(talk: .example)
+        }
     }
 }

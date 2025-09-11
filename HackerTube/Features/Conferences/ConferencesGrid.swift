@@ -19,6 +19,7 @@ struct ConferencesGrid: View {
     }
 }
 
+#if os(iOS)
 private struct ConferencesGridRegular: View {
     let conferences: [Conference]
     let columns: [GridItem] = [
@@ -47,6 +48,7 @@ private struct ConferencesGridRegular: View {
         .accessibilityElement(children: .contain)
     }
 }
+#endif
 
 #if os(tvOS)
     private struct ConferencesGridTV: View {

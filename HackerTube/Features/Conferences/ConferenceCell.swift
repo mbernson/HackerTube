@@ -8,18 +8,28 @@
 import CCCApi
 import SwiftUI
 
+#if os(iOS)
 struct ConferenceCell: View {
     let conference: Conference
 
     var body: some View {
         VStack {
-            ConferenceThumbnail(conference: conference)
+            if #available(iOS 26.0, *) {
+                ConferenceThumbnail(conference: conference)
+                    .clipShape(ConcentricRectangle(
+                        corners: .concentric,
+                        isUniform: true
+                    ))
+            } else {
+                ConferenceThumbnail(conference: conference)
+            }
 
             Text(conference.title)
                 .font(.headline)
                 .lineLimit(2, reservesSpace: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .containerShape(.rect(cornerRadius: 24))
     }
 }
 
@@ -31,3 +41,4 @@ struct ConferenceCell: View {
     .border(.blue)
     .padding()
 }
+#endif
