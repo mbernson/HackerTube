@@ -19,7 +19,7 @@ struct TalksGrid: View {
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 private struct TalksGridRegular: View {
     let talks: [Talk]
     let columns: [GridItem] = [

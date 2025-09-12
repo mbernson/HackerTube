@@ -8,7 +8,7 @@
 import CCCApi
 import SwiftUI
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 struct ConferenceCell: View {
     let conference: Conference
 

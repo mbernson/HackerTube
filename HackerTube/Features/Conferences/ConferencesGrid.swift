@@ -19,7 +19,7 @@ struct ConferencesGrid: View {
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 private struct ConferencesGridRegular: View {
     let conferences: [Conference]
     let columns: [GridItem] = [
