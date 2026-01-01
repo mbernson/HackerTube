@@ -4,10 +4,15 @@
 
 HackerTube is an app for watching the talks and activities of the Chaos Computer Club and related conferences on tvOS (Apple TV), iOS and macOS. It is a client that uses the public REST API of [media.ccc.de](https://media.ccc.de/). It is free software (GPL licensed) and is not officially affiliated with the CCC.
 
-<br>
+I've created it because of my personal desire to watch Chaos Event talks on my Apple TV. At that time, there was no such app available on the tvOS App Store. The project goal is to create the best native viewing experience on Apple platforms.
+
+HackerTube respects your privacy. It does not use tracking, analytics or "cookies" of any kind. The network requests it makes are solely for the purposes of calling the [media.ccc.de](https://media.ccc.de/) public API and to stream the actual videos.
+
+## Where to get it?
 
 * 🍏 [Download on the App Store](https://apps.apple.com/us/app/ccc-tube/id1637341762)
 * ✈️ [Join the public beta on TestFlight](https://testflight.apple.com/join/44XL86pK)
+* 🐙 Or you can build and run the code yourself.
 
 ## Screenshots
 
