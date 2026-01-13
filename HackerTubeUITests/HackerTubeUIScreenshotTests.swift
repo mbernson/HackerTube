@@ -7,8 +7,7 @@
 
 import XCTest
 
-@MainActor
-final class HackerTubeUIScreenshotTests: XCTestCase {
+class HackerTubeUIScreenshotTests: XCTestCase {
     var app: XCUIApplication!
 
     override func setUpWithError() throws {
