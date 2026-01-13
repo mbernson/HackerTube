@@ -19,25 +19,41 @@ enum CopyrightState: Equatable {
 class TalkViewModel {
     var currentTalk: Talk?
     var recordings: [Recording] = []
-    var preferredRecording: Recording?
+    var selectedRecording: Recording?
     var copyright: CopyrightState = .loading
 
     private let client: MediaCCCApiClient
     private let mediaAnalyzer: MediaAnalyzer
+    private let recordingChooser: RecordingChooser
 
     init() {
         client = .init()
         mediaAnalyzer = .init()
+        recordingChooser = .init()
     }
 
     func loadRecordings(for talk: Talk) async throws {
-        let recordings = try await client.recordings(for: talk)
+        // Populate the recordings dropdown
+        recordings = try await client.recordings(for: talk)
+            // Remove everything that's not playable
+            .filter { recordingChooser.canPlay(recording: $0) }
+            // Put the HD versions first
+            .sorted(by: { lhs, rhs in
+                return lhs.isHighQuality && !rhs.isHighQuality
+            })
+            // Put the audio versions last
+            .sorted(by: { lhs, rhs in
+                return !lhs.isAudio && rhs.isAudio
+            })
+
+        // Pre-select the preferred recording
+        selectedRecording = recordingChooser.choosePreferredRecording(
+            from: recordings,
+            prefersHighQuality: true, // TODO: Hook up with a preference and/or respect low data mode
+            prefersAudio: false // TODO: Hook up with a preference 'prefer audio'
+        )
+
         currentTalk = talk
-        self.recordings = recordings
-        let hdRecording = recordings.first(where: { $0.isHighQuality && $0.isVideo })
-        let sdRecording = recordings.first(where: { !$0.isHighQuality && $0.isVideo })
-        let audioRecording = recordings.first(where: { $0.isAudio })
-        preferredRecording = hdRecording ?? sdRecording ?? audioRecording
 
         await loadCopyright(for: recordings)
     }

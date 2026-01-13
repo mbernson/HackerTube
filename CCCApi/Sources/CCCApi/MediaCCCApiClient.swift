@@ -77,22 +77,6 @@ public final class MediaCCCApiClient {
         let (data, _) = try await session.data(
             from: baseURL.appendingPathComponent("events").appendingPathComponent(talk.guid))
         let response = try decoder.decode(TalkExtended.self, from: data)
-        guard let recordings = response.recordings else {
-            return []
-        }
-        return
-            recordings
-            // Remove formats Apple doesn't support
-            .filter { !$0.mimeType.contains("opus") }
-            .filter { !$0.mimeType.contains("webm") }
-            .filter { !$0.mimeType.starts(with: "application") }
-            // Put the HD versions first
-            .sorted(by: { lhs, rhs in
-                lhs.isHighQuality && !rhs.isHighQuality
-            })
-            // Put the audio versions last
-            .sorted(by: { lhs, rhs in
-                !lhs.isAudio && rhs.isAudio
-            })
+        return response.recordings ?? []
     }
 }
