@@ -34,6 +34,10 @@ jobs:
       with:
         xcode-version: ${{ env.XCODE_VERSION }}
 
+    - name: Create iOS Simulator
+      run: |
+        xcrun simctl create "${{ env.TEST_DEVICE_NAME }}" "${{ env.TEST_DEVICE_TYPE }}"
+
     - name: Test
       run: |
         xcodebuild test \
