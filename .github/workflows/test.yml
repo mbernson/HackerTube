@@ -6,37 +6,50 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  XCODE_VERSION: '26'
+  XCODE_PROJECT: "HackerTube.xcodeproj"
+  SCHEME: "HackerTube"
+  TEST_PLAN: UnitTests
+  TEST_RESULT_BUNDLE: "TestResults.xcresult"
+
+  # iOS Simulator configuration
+  TEST_PLATFORM: 'iOS Simulator'
+  TEST_DEVICE_TYPE: 'iPhone 16'
+
 jobs:
   build:
     name: Build and Test on iOS Simulator
     runs-on: macos-latest
+
     env:
-      XCODE_PROJECT: "HackerTube.xcodeproj"
-      SCHEME: "HackerTube"
-      PLATFORM: 'iOS Simulator'
-      DEVICE: 'iPhone 16'
-      TEST_PLAN: UnitTests
-      TEST_RESULT_BUNDLE: "TestResults.xcresult"
+      TEST_DEVICE_NAME: 'TestDevice'
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v6
 
-      - name: Set up Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '26.0-beta'
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: ${{ env.XCODE_VERSION }}
 
-      - name: Test
-        run: |
-          set -o pipefail && xcodebuild test \
-            -project "${{ env.XCODE_PROJECT }}" \
-            -scheme ${{ env.SCHEME }} \
-            -testPlan "${{ env.TEST_PLAN }}" \
-            -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
-            -destination "platform=${{ env.PLATFORM }},name=${{ env.DEVICE }}" | xcpretty
+    - name: Create iOS Simulator
+      run: |
+        xcrun simctl create "${{ env.TEST_DEVICE_NAME }}" "${{ env.TEST_DEVICE_TYPE }}"
 
-      - name: Upload test result bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.SCHEME }}-${{ github.sha }}.xcresult
-          path: ${{ env.TEST_RESULT_BUNDLE }}
+    - name: Test
+      run: |
+        xcodebuild test \
+          -project "${{ env.XCODE_PROJECT }}" \
+          -scheme ${{ env.SCHEME }} \
+          -testPlan "${{ env.TEST_PLAN }}" \
+          -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
+          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}"
+
+    - name: Upload test result bundle
+      uses: actions/upload-artifact@v4
+      if: ${{ failure() }}
+      with:
+        name: ${{ env.SCHEME }}-${{ env.TEST_PLAN }}-${{ github.sha }}.xcresult
+        path: ${{ env.TEST_RESULT_BUNDLE }}
