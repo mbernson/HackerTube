@@ -11,8 +11,7 @@ import Foundation
 import os.log
 
 @Observable
-@MainActor
-final class TalkPlayerViewModel {
+class TalkPlayerViewModel {
     var player = AVPlayer()
 
     var currentRecording: Recording?

@@ -1,5 +1,5 @@
 //
-//  ApiService.swift
+//  MediaCCCApiClient.swift
 //  CCCApi
 //
 //  Created by Mathijs Bernson on 29/07/2022.
@@ -7,17 +7,13 @@
 
 import Foundation
 
-@MainActor
-@Observable
-public class ApiService {
+public final class MediaCCCApiClient {
     private let session: URLSession
     private let baseURL = URL(string: "https://api.media.ccc.de/public")!
     private let decoder = JSONDecoder()
 
-    public static let shared = ApiService()
-
-    public init() {
-        session = URLSession(configuration: .default)
+    public init(urlSession: URLSession = .shared) {
+        session = urlSession
         decoder.dateDecodingStrategy = .formatted(CustomISO8601DateFormatter())
     }
 

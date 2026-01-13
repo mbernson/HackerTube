@@ -16,7 +16,7 @@ struct HackerTubeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(ApiService.shared)
+                .environment(ApiService())
                 .onAppear {
                     do {
                         try AVAudioSession.sharedInstance().setCategory(.playback)
