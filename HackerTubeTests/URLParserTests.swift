@@ -5,27 +5,35 @@
 //  Created by Mathijs Bernson on 30/07/2022.
 //
 
-import XCTest
-
+import Foundation
+import Testing
 @testable import HackerTube
 
-class URLParserTests: XCTestCase {
+@Suite("URLParser")
+struct URLParserTests {
     let parser = URLParser()
 
-    func testParseOpenURL() {
-        let url = URL(string: "ccctube://talk/44ab627f-ed5d-522b-b84b-15a3ed761895")!
-        XCTAssertEqual(parser.parseURL(url), .openTalk(id: "44ab627f-ed5d-522b-b84b-15a3ed761895"))
+    @Test("Parses valid ccctube:// URLs", arguments: zip(
+        [
+            URL(string: "ccctube://talk/44ab627f-ed5d-522b-b84b-15a3ed761895")!,
+            URL(string: "ccctube://talk/44ab627f-ed5d-522b-b84b-15a3ed761895/play")!,
+        ],
+        [
+            URLRoute.openTalk(id: "44ab627f-ed5d-522b-b84b-15a3ed761895"),
+            URLRoute.playTalk(id: "44ab627f-ed5d-522b-b84b-15a3ed761895"),
+        ]
+    ))
+    func parsesValidURL(_ url: URL, expectedRoute: URLRoute) {
+        #expect(parser.parseURL(url) == expectedRoute)
     }
 
-    func testParsePlayURL() {
-        let url = URL(string: "ccctube://talk/44ab627f-ed5d-522b-b84b-15a3ed761895/play")!
-        XCTAssertEqual(parser.parseURL(url), .playTalk(id: "44ab627f-ed5d-522b-b84b-15a3ed761895"))
-    }
-
-    func testInvalidURLs() {
-        XCTAssertNil(parser.parseURL(URL(string: "ccctube://")!))
-        XCTAssertNil(parser.parseURL(URL(string: "https://google.com/")!))
-        XCTAssertNil(parser.parseURL(URL(string: "ccctube://foo")!))
-        XCTAssertNil(parser.parseURL(URL(string: "mailto:info@example.com")!))
+    @Test("Returns nil for invalid URLs", arguments: [
+        "ccctube://",
+        "https://google.com/",
+        "ccctube://foo",
+        "mailto:info@example.com",
+    ])
+    func returnsNilForInvalidURL(_ urlString: String) {
+        #expect(parser.parseURL(URL(string: urlString)!) == nil)
     }
 }
