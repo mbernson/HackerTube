@@ -8,5 +8,18 @@
 import Foundation
 
 enum UserDefaultsKey: String {
-    case playbackRate = "playbackRate"
+    case playbackRate
+    case lowDataModeEnabled
+}
+
+extension UserDefaults {
+    @objc dynamic var playbackRate: Float {
+        get { float(forKey: UserDefaultsKey.playbackRate.rawValue) }
+        set { setValue(newValue, forKey: UserDefaultsKey.playbackRate.rawValue) }
+    }
+
+    @objc dynamic var lowDataModeEnabled: Bool {
+        get { bool(forKey: UserDefaultsKey.lowDataModeEnabled.rawValue) }
+        set { setValue(newValue, forKey: UserDefaultsKey.lowDataModeEnabled.rawValue) }
+    }
 }

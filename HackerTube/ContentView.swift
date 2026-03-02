@@ -27,6 +27,10 @@ struct ContentView: View {
                 ConferencesView()
             }
 
+            Tab("Settings", systemImage: "gear") {
+                SettingsView()
+            }
+
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
                 SearchView()
             }

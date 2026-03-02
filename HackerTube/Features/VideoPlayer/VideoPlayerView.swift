@@ -6,6 +6,7 @@
 //
 
 import AVKit
+import Combine
 import SwiftUI
 import os.log
 
@@ -59,15 +60,27 @@ class VideoPlayerCoordinator: NSObject, AVPlayerViewControllerDelegate {
 
 class VideoPlayerViewController: AVPlayerViewController {
     private var selectedSpeedObserver: NSKeyValueObservation?
+    private var cancelable: AnyCancellable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let userDefaults = UserDefaults.standard
+
         selectedSpeedObserver = self.observe(\.selectedSpeed, options: [.new]) { controller, change in
             if let selectedSpeed = change.newValue.flatMap({ $0 }) {
-                UserDefaults.standard.set(selectedSpeed.rate, forKey: UserDefaultsKey.playbackRate.rawValue)
+                userDefaults.set(selectedSpeed.rate, forKey: UserDefaultsKey.playbackRate.rawValue)
             }
         }
+        
+        cancelable = userDefaults.publisher(for: \.playbackRate)
+            .sink(receiveValue: { [weak self] newValue in
+                guard let player = self?.player else { return }
+
+                if newValue != player.rate {
+                    player.rate = newValue
+                }
+            })
     }
 
     override func viewDidAppear(_ animated: Bool) {

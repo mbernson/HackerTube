@@ -16,6 +16,7 @@ class HackerTubeAppDelegate: NSObject, UIApplicationDelegate {
     private func registerDefaultSettings() {
         UserDefaults.standard.register(defaults: [
             UserDefaultsKey.playbackRate.rawValue : 1.0 as Float,
+            UserDefaultsKey.lowDataModeEnabled.rawValue : false,
         ])
     }
 }
