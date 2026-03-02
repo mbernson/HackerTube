@@ -107,6 +107,7 @@ struct YearPicker: View {
             Label("Year", systemImage: "calendar")
         }
         .pickerStyle(.menu)
+        .labelStyle(.iconOnly)
         .fixedSize(horizontal: true, vertical: false)
     }
 }
