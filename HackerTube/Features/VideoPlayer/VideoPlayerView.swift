@@ -25,6 +25,9 @@ struct VideoPlayerView: UIViewControllerRepresentable {
             playerViewController.canStartPictureInPictureAutomaticallyFromInline = true
         #endif
 
+        // The playback speeds don't appear on tvOS unless this is explicitly set.
+        playerViewController.speeds = AVPlaybackSpeed.systemDefaultSpeeds
+
         return playerViewController
     }
 
