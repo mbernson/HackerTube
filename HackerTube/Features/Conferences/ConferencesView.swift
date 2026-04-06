@@ -50,13 +50,14 @@ struct ConferencesView: View {
     func refresh() async {
         do {
             conferences = try await api.conferences()
-                .filter { conference in
-                    conference.eventLastReleasedAt != nil
-                }
                 .sorted { lhs, rhs in
-                    let lhsVal = lhs.eventLastReleasedAt ?? lhs.updatedAt
-                    let rhsVal = rhs.eventLastReleasedAt ?? rhs.updatedAt
-                    return lhsVal > rhsVal
+                    // Sort by updated at, falling back to title sort.
+                    if let lhsUpdatedAt = lhs.eventLastReleasedAt ?? lhs.updatedAt,
+                       let rhsUpdatedAt = rhs.eventLastReleasedAt ?? rhs.updatedAt {
+                        return lhsUpdatedAt > rhsUpdatedAt
+                    } else {
+                        return lhs.title < rhs.title
+                    }
                 }
         } catch is CancellationError {
         } catch {

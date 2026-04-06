@@ -16,7 +16,7 @@ public struct Conference: Decodable, Identifiable, Sendable {
     public let acronym: String
     public let slug: String
     public let title: String
-    public let updatedAt: Date
+    public let updatedAt: Date?
     public let eventLastReleasedAt: Date?
     public let events: [Talk]?
     public let link: URL?
@@ -31,7 +31,7 @@ public struct Conference: Decodable, Identifiable, Sendable {
     public var id: String { slug }
 
     init(
-        acronym: String, slug: String, title: String, updatedAt: Date,
+        acronym: String, slug: String, title: String, updatedAt: Date?,
         eventLastReleasedAt: Date? = nil, events: [Talk]? = nil, link: URL? = nil,
         description: String? = nil, aspectRatio: AspectRatio? = nil, webgenLocation: String,
         url: URL, logoURL: URL, imagesURL: URL? = nil, recordingsURL: URL? = nil
@@ -75,7 +75,7 @@ public struct Conference: Decodable, Identifiable, Sendable {
         acronym = try container.decode(String.self, forKey: .acronym)
         slug = try container.decode(String.self, forKey: .slug)
         title = try container.decode(String.self, forKey: .title)
-        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
+        updatedAt = try container.decode(Date?.self, forKey: .updatedAt)
         eventLastReleasedAt = try container.decode(Date?.self, forKey: .eventLastReleasedAt)
         events = try? container.decode([Event].self, forKey: .events)
         link = try? container.decode(URL?.self, forKey: .link)
