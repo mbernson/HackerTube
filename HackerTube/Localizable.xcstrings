@@ -10,13 +10,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld Aufruf"
+                  "value" : "%lld Wiedergabe"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld Aufrufe"
+                  "value" : "%lld Wiedergaben"
                 }
               }
             }
@@ -84,7 +84,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copyright ©"
+            "value" : "Copyright"
           }
         },
         "nl" : {
@@ -257,7 +257,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suche"
+            "value" : "Suchen"
           }
         },
         "nl" : {
