@@ -1,41 +1,51 @@
 [
-    // General tech & society
-    "Freedom", "Linux", "Ethics", "Internet of Things",
-    "Internet", "Software", "Hardware", "Cloud", "Networking",
-    "Open source", "Free software",
+    // Hacking & security
+    "Security", "Cybersecurity", "Ethical hacking", "Penetration testing",
+    "Cryptography", "Encryption", "Post-quantum cryptography",
+    "Privacy", "Anonymity", "Data protection", "Surveillance", "Spyware",
+    "Malware analysis", "Digital forensics", "Social engineering",
+    "Reverse engineering", "Fuzzing", "Side-channel attacks",
+    "Certificate transparency", "Passkeys", "WebAuthn",
+    "Secure boot", "Bootloader", "CTF",
 
-    // Security & privacy
-    "Security", "Cryptography", "Encryption",
-    "Privacy", "Anonymity", "Dark web",
-    "Cybersecurity", "Digital rights", "Ethical hacking",
-    "Malware analysis", "Data protection", "Forensics", "Digital forensics", "Social engineering",
-    "Network security", "Penetration testing", "Bug bounties", "Reverse engineering",
+    // Systems & infrastructure
+    "Linux", "NixOS", "Containers", "Kubernetes",
+    "Cloud", "Self-hosting", "Internet", "Networking",
+    "IPv6", "BGP", "DNS", "DNSSEC", "eBPF", "VPN",
+    "4G", "5G", "Cellular", "LoRa",
 
     // AI & data
-    "Artificial intelligence", "AI", "Machine learning", "Neural networks", "Language models",
+    "Artificial intelligence", "AI", "Machine learning", "Neural networks",
+    "Language models", "Large language models", "RAG", "AI agents",
     "Data Science",
 
-    // Hardware & electronics
-    "Electronics", "Robotics", "Quantum computing", "Microcontroller",
-    "Drones", "Autonomous vehicles", "Wearable tech",
-    "Virtual reality (VR)", "Augmented reality (AR)",
+    // Hardware & making
+    "Electronics", "Hardware", "Microcontroller", "FPGA", "Embedded systems",
+    "ESP32", "Raspberry Pi", "3D printing", "Laser",
+    "Robotics", "Drones", "Autonomous vehicles",
+    "Wearable tech", "Virtual reality (VR)", "Augmented reality (AR)",
+    "Quantum computing", "Amateur radio", "Internet of Things",
 
-    // Programming languages
-    "Python", "Rust",
+    // Programming
+    "Software", "Open source", "Free software",
+    "Python", "Rust", "Go", "Haskell",
 
-    // Science
-    "Science", "Chemistry", "Math", "Physics", "Biology", "Biohacking", "DNA", "Biometrics",
-    "Information theory", "Communication", "GPS",
+    // Communications & protocols
+    "Matrix", "Fediverse", "Signal", "Meshtastic", "Meshcore",
+    "End-to-end encryption", "Federated", "Decentralized",
 
-    // Culture & community
-    "Lightning talks", "Climate",
-    "Mental health", "Accessibility",
-    "Internet governance", "Hacktivism",
-    "The ultimate talk", "Radio communications", "Badge",
+    // Society, politics & law
+    "Freedom", "Ethics", "Digital sovereignty", "Digital rights",
+    "Internet governance", "Hacktivism", "Elections",
+    "Chat control", "E-voting", "Surveillance capitalism",
+    "Climate", "Mental health", "Accessibility",
 
-    // Cryptocurrency
-    "Blockchain", "Cryptocurrency",
+    // Science & space
+    "Science", "Chemistry", "Math", "Physics", "Biology",
+    "Biohacking", "DNA", "Biometrics",
+    "Information theory", "GPS", "Satellites",
 
-    // Wireless & cellular
-    "4G", "5G", "Cellular",
+    // Community & culture
+    "Lightning talks", "The ultimate talk", "Badge", "Radio communications",
+    "OpenStreetMap", "Game development", "Godot", "Infrastructure review"
 ]
