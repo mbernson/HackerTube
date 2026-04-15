@@ -13,28 +13,13 @@ struct SearchSuggestion: Identifiable {
 }
 
 extension SearchSuggestion {
-    static let defaultSuggestions: [SearchSuggestion] = [
-        "Freedom", "Linux", "Ethics", "Internet of Things",
-        "Security", "Lightning talks", "Climate", "Cryptography", "Encryption",
-        "Internet", "Software", "Hardware", "Cloud", "Networking",
-        "Privacy", "Mental health", "Accessibility",
-        "Artificial intelligence", "AI", "Machine learning", "Neural networks", "Language models",
-        "Electronics", "Robotics", "Quantum computing", "Microcontroller",
-        "Python", "Rust",
-        "Science", "Chemistry", "Math", "Physics", "Biology", "Biohacking", "DNA", "Biometrics",
-        "Information theory", "Communication", "GPS",
-        "The ultimate talk", "Radio communications", "Badge",
-        "Blockchain", "Cryptocurrency",
-        "Digital forensics",
-        "Drones", "Autonomous vehicles", "Smart cities",
-        "Cybersecurity", "Digital rights", "Ethical hacking", "Data Science",
-        "Internet governance", "Hacktivism",
-        "Open source", "Free software",
-        "Malware analysis", "Data protection", "Forensics", "Social engineering",
-        "Network security",
-        "Virtual reality (VR)", "Augmented reality (AR)", "Wearable tech",
-        "Penetration testing", "Bug bounties", "Reverse engineering",
-        "Dark web", "Anonymity",
-        "4G", "5G", "Cellular",
-    ].map(SearchSuggestion.init)
+    static let defaultSuggestions: [SearchSuggestion] = {
+        guard let url = Bundle.main.url(forResource: "SearchSuggestions", withExtension: "json5"),
+              let data = try? Data(contentsOf: url)
+        else { return [] }
+        let decoder = JSONDecoder()
+        decoder.allowsJSON5 = true
+        guard let titles = try? decoder.decode([String].self, from: data) else { return [] }
+        return titles.map(SearchSuggestion.init)
+    }()
 }

@@ -1,0 +1,41 @@
+[
+    // General tech & society
+    "Freedom", "Linux", "Ethics", "Internet of Things",
+    "Internet", "Software", "Hardware", "Cloud", "Networking",
+    "Open source", "Free software",
+
+    // Security & privacy
+    "Security", "Cryptography", "Encryption",
+    "Privacy", "Anonymity", "Dark web",
+    "Cybersecurity", "Digital rights", "Ethical hacking",
+    "Malware analysis", "Data protection", "Forensics", "Digital forensics", "Social engineering",
+    "Network security", "Penetration testing", "Bug bounties", "Reverse engineering",
+
+    // AI & data
+    "Artificial intelligence", "AI", "Machine learning", "Neural networks", "Language models",
+    "Data Science",
+
+    // Hardware & electronics
+    "Electronics", "Robotics", "Quantum computing", "Microcontroller",
+    "Drones", "Autonomous vehicles", "Wearable tech",
+    "Virtual reality (VR)", "Augmented reality (AR)",
+
+    // Programming languages
+    "Python", "Rust",
+
+    // Science
+    "Science", "Chemistry", "Math", "Physics", "Biology", "Biohacking", "DNA", "Biometrics",
+    "Information theory", "Communication", "GPS",
+
+    // Culture & community
+    "Lightning talks", "Climate",
+    "Mental health", "Accessibility",
+    "Internet governance", "Hacktivism",
+    "The ultimate talk", "Radio communications", "Badge",
+
+    // Cryptocurrency
+    "Blockchain", "Cryptocurrency",
+
+    // Wireless & cellular
+    "4G", "5G", "Cellular",
+]
