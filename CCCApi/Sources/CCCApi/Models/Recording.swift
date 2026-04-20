@@ -9,7 +9,7 @@ import Foundation
 
 /// A recording is a file that belongs to a talk (event).
 /// These can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
-public struct Recording: Decodable, Identifiable, Equatable, Sendable {
+public struct Recording: Decodable, Identifiable, Hashable, Sendable {
     /// approximate file size in megabytes
     public let size: Int?
     /// duration in seconds

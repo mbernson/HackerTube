@@ -86,19 +86,21 @@ private struct TVPlayerView: View {
 
 private struct TalkMainView: View {
     let talk: Talk
-    var viewModel: TalkViewModel
+    @Bindable var viewModel: TalkViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Group {
                 #if os(tvOS) || os(visionOS)
-                    TVPlayerView(talk: talk, recording: viewModel.preferredRecording)
+                    TVPlayerView(talk: talk, recording: viewModel.selectedRecording)
                 #else
                     Group {
-                        if let preferredRecording = viewModel.preferredRecording {
+                        if let selectedRecording = viewModel.selectedRecording {
                             TalkPlayerView(
-                                talk: talk, recording: preferredRecording,
-                                automaticallyStartsPlayback: true)
+                                talk: talk,
+                                recording: selectedRecording,
+                                automaticallyStartsPlayback: true
+                            )
                         } else {
                             Rectangle()
                                 .fill(.black)
@@ -117,9 +119,13 @@ private struct TalkMainView: View {
                     .padding(.horizontal)
             }
 
-            CopyrightView(talk: talk, viewModel: viewModel)
-                .padding(.horizontal)
+            RecordingSelectionView(
+                recordings: viewModel.recordings,
+                selectedRecording: $viewModel.selectedRecording
+            )
+            .padding(.horizontal)
         }
+        .padding(.bottom)
         .animation(.default, value: viewModel.copyright)
         #if os(tvOS)
             .focusSection()
@@ -138,7 +144,7 @@ private struct TalkMainView: View {
 
 private struct CopyrightView: View {
     let talk: Talk
-    var viewModel: TalkViewModel
+    @Bindable var viewModel: TalkViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -246,7 +252,7 @@ private struct TalkDescriptionSheetView: View {
 private struct TalkMetaView: View {
     let talk: Talk
     @Binding var selectedRecording: Recording?
-    var viewModel: TalkViewModel
+    @Bindable var viewModel: TalkViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -269,6 +275,50 @@ private struct TalkMetaView: View {
             if !talk.persons.isEmpty {
                 Label(talk.persons.joined(separator: ", "), systemImage: "person")
             }
+
+            CopyrightView(talk: talk, viewModel: viewModel)
+        }
+    }
+}
+
+private struct RecordingSelectionView: View {
+    let recordings: [Recording]
+    @Binding var selectedRecording: Recording?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Recording")
+                .font(.headline)
+
+            Picker(selection: $selectedRecording) {
+                ForEach(recordings) { recording in
+                    Label(recording.description, systemImage: recording.systemImageName)
+                        .tag(recording)
+                }
+            } label: {
+                Text("Select recording")
+            }
+            .pickerStyle(.menu)
+        }
+    }
+}
+
+extension Recording {
+    var description: String {
+        if let width, let height, width > 0 && height > 0 {
+            return "\(language) \(folder) (\(width)x\(height))"
+        } else {
+            return "\(language) \(folder)"
+        }
+    }
+
+    var systemImageName: String {
+        if mimeType.starts(with: "video") {
+            return "film"
+        } else if mimeType.starts(with: "audio") {
+            return "speaker.wave.3"
+        } else {
+            return "questionmark"
         }
     }
 }
