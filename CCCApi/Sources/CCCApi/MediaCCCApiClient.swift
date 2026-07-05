@@ -6,50 +6,61 @@
 //
 
 import Foundation
+import os.log
 
 public final class MediaCCCApiClient {
     private let session: URLSession
     private let baseURL = URL(string: "https://api.media.ccc.de/public")!
     private let decoder = JSONDecoder()
+    private let logger = Logger(subsystem: "eu.bernson.HackerTube.CCCApi", category: "MediaCCCApiClient")
 
     public init(urlSession: URLSession = .shared) {
         session = urlSession
         decoder.dateDecodingStrategy = .formatted(CustomISO8601DateFormatter())
     }
 
+    // MARK: Networking
+
+    /// Performs a GET request for the given URL, logging the request and response,
+    /// and decodes the response body into the requested type.
+    private func get<T: Decodable>(_ url: URL) async throws -> T {
+        logger.info("GET \(url.absoluteString, privacy: .public)")
+        do {
+            let (data, response) = try await session.data(from: url)
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+            logger.info("Response code \(statusCode) \(url.absoluteString, privacy: .public) (\(data.count) bytes)")
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            logger.error("GET \(url.absoluteString, privacy: .public) failed: \(error.localizedDescription, privacy: .public)")
+            throw error
+        }
+    }
+
     // MARK: Conferences
 
     public func conferences() async throws -> [Conference] {
-        let (data, _) = try await session.data(from: baseURL.appendingPathComponent("conferences"))
-        let response = try decoder.decode(ConferencesResponse.self, from: data)
+        let response: ConferencesResponse = try await get(baseURL.appendingPathComponent("conferences"))
         return response.conferences
     }
 
     public func conference(acronym: String) async throws -> Conference {
-        let (data, _) = try await session.data(
-            from: baseURL.appendingPathComponent("conferences").appendingPathComponent(acronym))
-        return try decoder.decode(Conference.self, from: data)
+        try await get(baseURL.appendingPathComponent("conferences").appendingPathComponent(acronym))
     }
 
     // MARK: Talks
 
     public func talk(id: String) async throws -> Talk {
-        let (data, _) = try await session.data(
-            from: baseURL.appendingPathComponent("events").appendingPathComponent(id))
-        let response = try decoder.decode(Talk.self, from: data)
-        return response
+        try await get(baseURL.appendingPathComponent("events").appendingPathComponent(id))
     }
 
     public func talks() async throws -> [Talk] {
-        let (data, _) = try await session.data(from: baseURL.appendingPathComponent("events"))
-        let response = try decoder.decode(EventsResponse.self, from: data)
+        let response: EventsResponse = try await get(baseURL.appendingPathComponent("events"))
         return response.events
     }
 
     public func recentTalks() async throws -> [Talk] {
-        let (data, _) = try await session.data(
-            from: baseURL.appendingPathComponent("events").appendingPathComponent("recent"))
-        let response = try decoder.decode(EventsResponse.self, from: data)
+        let response: EventsResponse = try await get(
+            baseURL.appendingPathComponent("events").appendingPathComponent("recent"))
         return response.events
     }
 
@@ -57,8 +68,7 @@ public final class MediaCCCApiClient {
         let url = baseURL.appendingPathComponent("events").appendingPathComponent("popular")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         components.queryItems = [URLQueryItem(name: "year", value: String(year))]
-        let (data, _) = try await session.data(from: components.url!)
-        let response = try decoder.decode(EventsResponse.self, from: data)
+        let response: EventsResponse = try await get(components.url!)
         return response.events
     }
 
@@ -66,17 +76,15 @@ public final class MediaCCCApiClient {
         let url = baseURL.appendingPathComponent("events").appendingPathComponent("search")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         components.queryItems = [URLQueryItem(name: "q", value: query)]
-        let (data, _) = try await session.data(from: components.url!)
-        let response = try decoder.decode(EventsResponse.self, from: data)
+        let response: EventsResponse = try await get(components.url!)
         return response.events
     }
 
     // MARK: Recordings
 
     public func recordings(for talk: Talk) async throws -> [Recording] {
-        let (data, _) = try await session.data(
-            from: baseURL.appendingPathComponent("events").appendingPathComponent(talk.guid))
-        let response = try decoder.decode(TalkExtended.self, from: data)
+        let response: TalkExtended = try await get(
+            baseURL.appendingPathComponent("events").appendingPathComponent(talk.guid))
         guard let recordings = response.recordings else {
             return []
         }
