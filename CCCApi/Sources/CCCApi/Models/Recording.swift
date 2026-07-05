@@ -14,8 +14,8 @@ struct RecordingsResponse: Decodable {
 /// A recording is a file that belongs to a talk (event).
 /// These can be video or audio recordings of the talk in different formats and languages (live-translation), subtitle tracks as srt or slides as pdf.
 public struct Recording: Decodable, Identifiable, Equatable, Sendable {
-    /// approximate file size in megabytes
-    public let size: Int?
+    /// Approximate file size, reported by the API in megabytes.
+    public let size: Measurement<UnitInformationStorage>?
     /// duration in seconds
     public let length: TimeInterval?
     public let mimeType: String
@@ -28,7 +28,7 @@ public struct Recording: Decodable, Identifiable, Equatable, Sendable {
     public let isHighQuality: Bool
     public let width: Int?
     public let height: Int?
-    public let updatedAt: Date
+    public let updatedAt: Date?
     public let url: URL
     public let recordingURL: URL
     public let eventURL: URL
@@ -45,9 +45,10 @@ public struct Recording: Decodable, Identifiable, Equatable, Sendable {
     }
 
     init(
-        size: Int?, length: TimeInterval?, mimeType: String, language: String, filename: String,
-        state: String, folder: String, label: String? = nil, isHighQuality: Bool, width: Int?,
-        height: Int?, updatedAt: Date, recordingURL: URL, url: URL, eventURL: URL, conferenceURL: URL
+        size: Measurement<UnitInformationStorage>?, length: TimeInterval?, mimeType: String,
+        language: String, filename: String, state: String, folder: String, label: String? = nil,
+        isHighQuality: Bool, width: Int?, height: Int?, updatedAt: Date?, recordingURL: URL,
+        url: URL, eventURL: URL, conferenceURL: URL
     ) {
         self.size = size
         self.length = length
@@ -89,7 +90,11 @@ public struct Recording: Decodable, Identifiable, Equatable, Sendable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        size = try container.decode(Int?.self, forKey: .size)
+        if let sizeMegabytes = try? container.decode(Double.self, forKey: .size) {
+            size = Measurement(value: sizeMegabytes, unit: .megabytes)
+        } else {
+            size = nil
+        }
         length = try container.decode(TimeInterval?.self, forKey: .length)
         mimeType = try container.decode(String.self, forKey: .mimeType)
         language = try container.decode(String.self, forKey: .language)
@@ -100,7 +105,7 @@ public struct Recording: Decodable, Identifiable, Equatable, Sendable {
         isHighQuality = try container.decode(Bool.self, forKey: .isHighQuality)
         width = try container.decode(Int?.self, forKey: .width)
         height = try container.decode(Int?.self, forKey: .height)
-        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
+        updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt)
         url = try container.decode(URL.self, forKey: .url)
         recordingURL = try container.decode(URL.self, forKey: .recordingURL)
         eventURL = try container.decode(URL.self, forKey: .eventURL)

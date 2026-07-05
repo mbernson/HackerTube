@@ -16,10 +16,12 @@ public struct Conference: Decodable, Identifiable, Sendable {
     public let acronym: String
     public let slug: String
     public let title: String
+    public let createdAt: Date?
     public let updatedAt: Date?
     public let eventLastReleasedAt: Date?
     public let events: [Talk]?
     public let link: URL?
+    public let scheduleURL: URL?
     public let description: String?
     public let aspectRatio: AspectRatio?
     public let webgenLocation: String
@@ -31,18 +33,21 @@ public struct Conference: Decodable, Identifiable, Sendable {
     public var id: String { slug }
 
     init(
-        acronym: String, slug: String, title: String, updatedAt: Date?,
-        eventLastReleasedAt: Date? = nil, events: [Talk]? = nil, link: URL? = nil,
-        description: String? = nil, aspectRatio: AspectRatio? = nil, webgenLocation: String,
+        acronym: String, slug: String, title: String, createdAt: Date? = nil,
+        updatedAt: Date?, eventLastReleasedAt: Date? = nil, events: [Talk]? = nil,
+        link: URL? = nil, scheduleURL: URL? = nil, description: String? = nil,
+        aspectRatio: AspectRatio? = nil, webgenLocation: String,
         url: URL, logoURL: URL, imagesURL: URL? = nil, recordingsURL: URL? = nil
     ) {
         self.acronym = acronym
         self.slug = slug
         self.title = title
+        self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.eventLastReleasedAt = eventLastReleasedAt
         self.events = events
         self.link = link
+        self.scheduleURL = scheduleURL
         self.description = description
         self.aspectRatio = aspectRatio
         self.webgenLocation = webgenLocation
@@ -56,10 +61,12 @@ public struct Conference: Decodable, Identifiable, Sendable {
         case acronym
         case slug
         case title
+        case createdAt = "created_at"
         case updatedAt = "updated_at"
         case eventLastReleasedAt = "event_last_released_at"
         case events
         case link
+        case scheduleURL = "schedule_url"
         case description
         case aspectRatio = "aspect_ratio"
         case webgenLocation = "webgen_location"
@@ -74,12 +81,14 @@ public struct Conference: Decodable, Identifiable, Sendable {
 
         acronym = try container.decode(String.self, forKey: .acronym)
         slug = try container.decode(String.self, forKey: .slug)
-        title = try container.decode(String.self, forKey: .title)
-        updatedAt = try container.decode(Date?.self, forKey: .updatedAt)
-        eventLastReleasedAt = try container.decode(Date?.self, forKey: .eventLastReleasedAt)
+        title = try container.decodeIfPresent(String.self, forKey: .title) ?? ""
+        createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt)
+        updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt)
+        eventLastReleasedAt = try container.decodeIfPresent(Date.self, forKey: .eventLastReleasedAt)
         events = try? container.decode([Event].self, forKey: .events)
         link = try? container.decode(URL?.self, forKey: .link)
-        description = try container.decode(String?.self, forKey: .description)
+        scheduleURL = try? container.decode(URL?.self, forKey: .scheduleURL)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
         aspectRatio = try? container.decode(AspectRatio.self, forKey: .aspectRatio)
         webgenLocation = try container.decode(String.self, forKey: .webgenLocation)
         url = try container.decode(URL.self, forKey: .url)

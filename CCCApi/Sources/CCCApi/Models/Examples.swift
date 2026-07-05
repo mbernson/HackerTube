@@ -51,7 +51,6 @@ extension Talk {
         date: try! Date("2022-07-26T16:00:00Z", strategy: .iso8601),
         releaseDate: try! Date("2022-07-26T00:00:00Z", strategy: .iso8601),
         updatedAt: try! Date("2022-07-29T17:15:05Z", strategy: .iso8601),
-        length: 1066,
         duration: 1066,
         conferenceTitle: "May Contain Hackers 2022",
         conferenceURL: URL(string: "https://api.media.ccc.de/public/conferences/MCH2022")!,
@@ -81,7 +80,7 @@ extension Talk {
 
 extension Recording {
     public static let example = Recording(
-        size: 461,
+        size: Measurement(value: 461, unit: .megabytes),
         length: 1066,
         mimeType: "video/mp4",
         language: "eng",
@@ -135,7 +134,7 @@ extension Array where Element == RelatedTalk {
 extension Array where Element == Recording {
     public static let example: [Recording] = [
         Recording(
-            size: 16,
+            size: Measurement(value: 16, unit: .megabytes),
             length: 1066,
             mimeType: "audio/mpeg",
             language: "eng",
@@ -157,7 +156,7 @@ extension Array where Element == Recording {
             conferenceURL: URL(string: "https://api.media.ccc.de/public/conferences/MCH2022")!
         ),
         Recording(
-            size: 101,
+            size: Measurement(value: 101, unit: .megabytes),
             length: 1066,
             mimeType: "video/mp4",
             language: "eng",
@@ -179,7 +178,7 @@ extension Array where Element == Recording {
             conferenceURL: URL(string: "https://api.media.ccc.de/public/conferences/MCH2022")!
         ),
         Recording(
-            size: 461,
+            size: Measurement(value: 461, unit: .megabytes),
             length: 1066,
             mimeType: "video/mp4",
             language: "eng",
