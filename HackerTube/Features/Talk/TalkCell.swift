@@ -13,11 +13,16 @@ struct TalkCell: View {
     let talk: Talk
 
     var subtitle: Text {
-        Text(talk.conferenceTitle) +
-        Text(verbatim: " • ") +
-        Text("\(talk.viewCount) views") +
-        Text(verbatim: " • ") +
-        Text(talk.releaseDate ?? talk.updatedAt, format: .relative(presentation: .named))
+        let releaseDate: String? = talk.releaseDate.flatMap { $0.formatted(.relative(presentation: .named)) }
+        return Text(
+            [
+                talk.conferenceTitle,
+                "\(talk.viewCount.formatted()) views",
+                releaseDate,
+            ]
+            .compactMap { $0 }
+            .joined(separator: " • ")
+        )
     }
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass

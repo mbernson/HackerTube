@@ -28,11 +28,10 @@ public struct Talk: Decodable, Identifiable, Equatable, Sendable {
     public let persons: [String]
     public let tags: [String]
     public let viewCount: Int
-    public let isPromoted: Bool
+    public let isPromoted: Bool?
     public let date: Date?
     public let releaseDate: Date?
-    public let updatedAt: Date
-    public let length: TimeInterval
+    public let updatedAt: Date?
     public let duration: TimeInterval
     public let conferenceTitle: String
     public let conferenceURL: URL
@@ -47,8 +46,8 @@ public struct Talk: Decodable, Identifiable, Equatable, Sendable {
     init(
         guid: String, title: String, subtitle: String?, slug: String, link: URL?,
         description: String?, originalLanguage: String?, persons: [String], tags: [String],
-        viewCount: Int, isPromoted: Bool, date: Date?, releaseDate: Date, updatedAt: Date,
-        length: TimeInterval, duration: TimeInterval, conferenceTitle: String, conferenceURL: URL,
+        viewCount: Int, isPromoted: Bool?, date: Date?, releaseDate: Date?, updatedAt: Date?,
+        duration: TimeInterval, conferenceTitle: String, conferenceURL: URL,
         thumbURL: URL?, posterURL: URL, timelineURL: URL, thumbnailsURL: URL, frontendLink: URL,
         url: URL, related: [RelatedTalk]
     ) {
@@ -66,7 +65,6 @@ public struct Talk: Decodable, Identifiable, Equatable, Sendable {
         self.date = date
         self.releaseDate = releaseDate
         self.updatedAt = updatedAt
-        self.length = length
         self.duration = duration
         self.conferenceTitle = conferenceTitle
         self.conferenceURL = conferenceURL
@@ -94,7 +92,6 @@ public struct Talk: Decodable, Identifiable, Equatable, Sendable {
         case date
         case releaseDate = "release_date"
         case updatedAt = "updated_at"
-        case length
         case duration
         case conferenceTitle = "conference_title"
         case conferenceURL = "conference_url"
@@ -117,16 +114,15 @@ public struct Talk: Decodable, Identifiable, Equatable, Sendable {
         link = try? container.decode(URL?.self, forKey: .link)
         description = try container.decode(String?.self, forKey: .description)
         originalLanguage = try container.decode(String?.self, forKey: .originalLanguage)
-        persons = try container.decode([String].self, forKey: .persons)
+        persons = try container.decodeIfPresent([String].self, forKey: .persons) ?? []
         tags = try container.decode([String].self, forKey: .tags)
-        viewCount = try container.decode(Int.self, forKey: .viewCount)
-        isPromoted = try container.decode(Bool.self, forKey: .isPromoted)
+        viewCount = try container.decodeIfPresent(Int.self, forKey: .viewCount) ?? 0
+        isPromoted = try container.decodeIfPresent(Bool.self, forKey: .isPromoted)
         date = try container.decode(Date?.self, forKey: .date)
         releaseDate = try container.decode(Date?.self, forKey: .releaseDate)
-        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
-        length = try container.decode(TimeInterval.self, forKey: .length)
+        updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt)
         duration = try container.decode(TimeInterval.self, forKey: .duration)
-        conferenceTitle = try container.decode(String.self, forKey: .conferenceTitle)
+        conferenceTitle = try container.decodeIfPresent(String.self, forKey: .conferenceTitle) ?? ""
         conferenceURL = try container.decode(URL.self, forKey: .conferenceURL)
         thumbURL = try? container.decode(URL?.self, forKey: .thumbURL)
         posterURL = try? container.decode(URL.self, forKey: .posterURL)
@@ -155,7 +151,7 @@ struct TalkExtended: Decodable {
 public struct RelatedTalk: Decodable, Equatable, Sendable {
     let eventID: Int
     let eventGUID: String
-    let weight: Int
+    let weight: Int?
 
     enum CodingKeys: String, CodingKey {
         case eventID = "event_id"
