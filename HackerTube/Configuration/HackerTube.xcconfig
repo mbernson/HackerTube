@@ -10,4 +10,4 @@
 // Build settings reference:
 // https://developer.apple.com/documentation/xcode/build-settings-reference
 
-MARKETING_VERSION = 1.5.1
+MARKETING_VERSION = 1.5.2
