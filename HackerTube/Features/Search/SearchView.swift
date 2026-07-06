@@ -14,7 +14,7 @@ struct SearchView: View {
     @State var query = ""
     @State var isLoading = false
     @State var error: Error?
-    @State var suggestions: [SearchSuggestion] = SearchSuggestion.defaultSuggestions.shuffled()
+    @State var suggestions = SearchSuggestion.defaultSuggestions.shuffled().prefix(15)
     @Environment(ApiService.self) var api
 
     var body: some View {
