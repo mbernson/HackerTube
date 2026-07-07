@@ -36,6 +36,7 @@ struct BrowseView: View {
                 #if os(tvOS)
                     if query == .popular {
                         YearPicker(year: $year)
+                            .pickerStyle(.menu)
                     }
                 #endif
 
@@ -51,7 +52,11 @@ struct BrowseView: View {
                         #endif
 
                         ToolbarItem(placement: .topBarTrailing) {
-                            YearPicker(year: $year)
+                            Menu {
+                                YearPicker(year: $year)
+                            } label: {
+                                Label("Year", systemImage: "calendar")
+                            }
                         }
                     }
                 #endif
@@ -93,21 +98,17 @@ struct BrowseView: View {
     }
 }
 
-struct YearPicker: View {
+private struct YearPicker: View {
     @Binding var year: Int
     let firstYear: Int = 2000
     let currentYear = Calendar.current.component(.year, from: .now)
     var body: some View {
-        Picker(selection: $year) {
+        Picker("Year", selection: $year) {
             ForEach(Array(firstYear...currentYear).reversed(), id: \.self) { year in
-                Text(String(year))
+                Text(year, format: .number.grouping(.never))
                     .tag(year)
             }
-        } label: {
-            Label("Year", systemImage: "calendar")
         }
-        .pickerStyle(.menu)
-        .fixedSize(horizontal: true, vertical: false)
     }
 }
 
