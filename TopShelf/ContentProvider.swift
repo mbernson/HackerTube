@@ -18,8 +18,8 @@ class ContentProvider: TVTopShelfContentProvider {
             let currentYear = Calendar.current.component(.year, from: .now)
             async let popularTalks = api.popularTalks(in: currentYear)
             let sections = try factory.makeTopShelfSections(
-                recentTalks: await recentTalks,
-                popularTalks: await popularTalks
+                recentTalks: await recentTalks.items,
+                popularTalks: await popularTalks.items
             )
             return TVTopShelfSectionedContent(sections: sections)
         } catch {
