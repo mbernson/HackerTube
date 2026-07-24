@@ -11,32 +11,39 @@ env:
   XCODE_PROJECT: "HackerTube.xcodeproj"
   SCHEME: "HackerTube"
   TEST_PLAN: UnitTests
-  TEST_RESULT_BUNDLE: "TestResults.xcresult"
-
-  # iOS Simulator configuration
-  TEST_PLATFORM: 'iOS Simulator'
-  TEST_DEVICE_TYPE: 'iPhone 16'
 
 jobs:
   build:
-    name: Build and Test on iOS Simulator
+    name: Test on ${{ matrix.name }}
     runs-on: macos-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: iOS Simulator
+            platform: 'iOS Simulator'
+            device_type: 'iPhone 17'
+          - name: tvOS Simulator
+            platform: 'tvOS Simulator'
+            device_type: 'Apple TV'
 
     env:
       TEST_DEVICE_NAME: 'TestDevice'
+      TEST_RESULT_BUNDLE: "TestResults.xcresult"
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: ${{ env.XCODE_VERSION }}
 
-    - name: Create iOS Simulator
+    - name: Create ${{ matrix.platform }}
       run: |
-        xcrun simctl create "${{ env.TEST_DEVICE_NAME }}" "${{ env.TEST_DEVICE_TYPE }}"
+        xcrun simctl create "${{ env.TEST_DEVICE_NAME }}" "${{ matrix.device_type }}"
 
     - name: Test
       run: |
@@ -45,11 +52,11 @@ jobs:
           -scheme ${{ env.SCHEME }} \
           -testPlan "${{ env.TEST_PLAN }}" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
-          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}"
+          -destination "platform=${{ matrix.platform }},name=${{ env.TEST_DEVICE_NAME }}"
 
     - name: Upload test result bundle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       if: ${{ failure() }}
       with:
-        name: ${{ env.SCHEME }}-${{ env.TEST_PLAN }}-${{ github.sha }}.xcresult
+        name: ${{ env.SCHEME }}-${{ env.TEST_PLAN }}-${{ matrix.platform }}-${{ github.sha }}.xcresult
         path: ${{ env.TEST_RESULT_BUNDLE }}
