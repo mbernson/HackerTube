@@ -15,26 +15,22 @@ struct TalkMetadataDetailPane: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Label {
-                Text(Duration.seconds(talk.duration), format: .time(pattern: .hourMinute))
-            } icon: {
-                Image(systemName: "clock")
-            }
+            DurationLabel(duration: talk.duration)
 
+            // Release date
             if let releaseDate = talk.releaseDate {
-                Label {
-                    Text(releaseDate, style: .date)
-                } icon: {
-                    Image(systemName: "calendar")
-                }
+                ReleaseDateLabel(releaseDate)
             }
 
-            Label("\(talk.viewCount) views", systemImage: "eye")
+            // View count
+            ViewCountLabel(numberOfViews: talk.viewCount)
 
+            // Presenters
             if !talk.persons.isEmpty {
-                Label(talk.persons.joined(separator: ", "), systemImage: "person")
+                PresentersLabel(presenterNames: talk.persons)
             }
 
+            // Copyright
             CopyrightView(talk: talk, viewModel: viewModel)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
