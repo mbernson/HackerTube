@@ -7,7 +7,7 @@
 
 import AVKit
 import SwiftUI
-import CCCApi
+import MediaCCCApi
 
 @main
 struct HackerTubeApp: App {

@@ -1,6 +1,6 @@
 //
 //  Examples.swift
-//  CCCApi
+//  MediaCCCApi
 //
 //  Created by Mathijs Bernson on 30/07/2022.
 //

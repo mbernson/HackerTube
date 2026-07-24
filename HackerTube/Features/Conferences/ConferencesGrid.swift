@@ -5,7 +5,7 @@
 //  Created by Mathijs Bernson on 11/09/2025.
 //
 
-import CCCApi
+import MediaCCCApi
 import SwiftUI
 
 struct ConferencesGrid: View {

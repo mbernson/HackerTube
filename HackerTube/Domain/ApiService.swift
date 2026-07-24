@@ -5,7 +5,7 @@
 //  Created by Mathijs Bernson on 13/01/2026.
 //
 
-import CCCApi
+import MediaCCCApi
 import Foundation
 
 @Observable

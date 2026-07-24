@@ -1,6 +1,6 @@
 //
 //  Page.swift
-//  CCCApi
+//  MediaCCCApi
 //
 //  Created by Mathijs Bernson on 05/07/2026.
 //

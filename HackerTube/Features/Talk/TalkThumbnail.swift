@@ -5,7 +5,7 @@
 //  Created by Mathijs Bernson on 14/07/2023.
 //
 
-import CCCApi
+import MediaCCCApi
 import SwiftUI
 
 struct TalkThumbnail: View {
