@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "MediaCCCApi",
+    defaultLocalization: "de",
     products: [
         .library(
             name: "MediaCCCApi",
@@ -13,7 +14,14 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "MediaCCCApi"
+            name: "MediaCCCApi",
+            resources: [
+                .process("Resources/Localizable.xcstrings")
+            ]
+        ),
+        .testTarget(
+            name: "MediaCCCApiTests",
+            dependencies: ["MediaCCCApi"]
         )
     ]
 )
