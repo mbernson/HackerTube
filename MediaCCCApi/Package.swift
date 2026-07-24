@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "MediaCCCApi",
-    platforms: [.tvOS(.v17), .iOS(.v17), .macOS(.v14)],
     products: [
         .library(
             name: "MediaCCCApi",
