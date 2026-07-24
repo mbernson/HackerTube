@@ -5,7 +5,7 @@
 //  Created by Mathijs Bernson on 27/06/2023.
 //
 
-import CCCApi
+import MediaCCCApi
 import SwiftUI
 
 struct TalkListItem: View {

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CCCApi
+import MediaCCCApi
 
 struct TalkDescriptionView: View {
     let talk: Talk

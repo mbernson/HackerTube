@@ -1,6 +1,6 @@
 //
 //  MediaCCCApiClient.swift
-//  CCCApi
+//  MediaCCCApi
 //
 //  Created by Mathijs Bernson on 29/07/2022.
 //
@@ -12,7 +12,7 @@ public final class MediaCCCApiClient {
     private let session: URLSession
     private let baseURL = URL(string: "https://api.media.ccc.de/public")!
     private let decoder = JSONDecoder()
-    private let logger = Logger(subsystem: "eu.bernson.HackerTube.CCCApi", category: "MediaCCCApiClient")
+    private let logger = Logger(subsystem: "eu.bernson.HackerTube.MediaCCCApi", category: "MediaCCCApiClient")
 
     public init(urlSession: URLSession = .shared) {
         session = urlSession
