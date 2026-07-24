@@ -5,7 +5,7 @@
 //  Created by Mathijs Bernson on 03/06/2024.
 //
 
-import CCCApi
+import MediaCCCApi
 import SwiftUI
 
 #if os(iOS) || os(visionOS)

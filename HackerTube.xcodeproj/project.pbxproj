@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D50C6F7628956DFC0003D1D0 /* CCCApi in Frameworks */ = {isa = PBXBuildFile; productRef = D50C6F7528956DFC0003D1D0 /* CCCApi */; };
+		D50C6F7628956DFC0003D1D0 /* MediaCCCApi in Frameworks */ = {isa = PBXBuildFile; productRef = D50C6F7528956DFC0003D1D0 /* MediaCCCApi */; };
 		D59139412895851300369402 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59139402895851300369402 /* TVServices.framework */; };
 		D59139482895851300369402 /* TopShelf.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D591393F2895851300369402 /* TopShelf.appex */; platformFilters = (tvos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D591394E2895854100369402 /* CCCApi in Frameworks */ = {isa = PBXBuildFile; productRef = D591394D2895854100369402 /* CCCApi */; };
+		D591394E2895854100369402 /* MediaCCCApi in Frameworks */ = {isa = PBXBuildFile; productRef = D591394D2895854100369402 /* MediaCCCApi */; };
 		D5F872252DFC3F3F002D2F28 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = D5F872242DFC3F35002D2F28 /* AppIcon.icon */; };
 		D5FCC6782FFC42DA00569E27 /* NanoSVG in Frameworks */ = {isa = PBXBuildFile; productRef = D5FCC6772FFC42DA00569E27 /* NanoSVG */; };
 /* End PBXBuildFile section */
@@ -52,7 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D50C6F7328956D770003D1D0 /* CCCApi */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CCCApi; sourceTree = "<group>"; };
+		D50C6F7328956D770003D1D0 /* MediaCCCApi */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MediaCCCApi; sourceTree = "<group>"; };
 		D557E8BA2896F70400342EE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D574ECF72FFC42FA0050AF63 /* NanoSVG */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NanoSVG; path = /Users/mathijs/Developer/HackerTube/NanoSVG; sourceTree = "<absolute>"; };
 		D591393F2895851300369402 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				D59139412895851300369402 /* TVServices.framework in Frameworks */,
-				D591394E2895854100369402 /* CCCApi in Frameworks */,
+				D591394E2895854100369402 /* MediaCCCApi in Frameworks */,
 			);
 		};
 		D591395628958B2600369402 /* Frameworks */ = {
@@ -127,7 +127,7 @@
 		D5A156D1289462B3006989FF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				D50C6F7628956DFC0003D1D0 /* CCCApi in Frameworks */,
+				D50C6F7628956DFC0003D1D0 /* MediaCCCApi in Frameworks */,
 				D5FCC6782FFC42DA00569E27 /* NanoSVG in Frameworks */,
 			);
 		};
@@ -155,7 +155,7 @@
 				D5F872242DFC3F35002D2F28 /* AppIcon.icon */,
 				D5D2CB2A2D43EBB300E08E44 /* UnitTests.xctestplan */,
 				D5AFD6D92C9BFCF700BF89F5 /* HackerTube */,
-				D50C6F7328956D770003D1D0 /* CCCApi */,
+				D50C6F7328956D770003D1D0 /* MediaCCCApi */,
 				D574ECF72FFC42FA0050AF63 /* NanoSVG */,
 				D5AFD6FB2C9BFCFB00BF89F5 /* TopShelf */,
 				D5AFD7022C9BFD0F00BF89F5 /* HackerTubeTests */,
@@ -196,7 +196,7 @@
 			);
 			name = TopShelf;
 			packageProductDependencies = (
-				D591394D2895854100369402 /* CCCApi */,
+				D591394D2895854100369402 /* MediaCCCApi */,
 			);
 			productName = TopShelf;
 			productReference = D591393F2895851300369402 /* TopShelf.appex */;
@@ -242,7 +242,7 @@
 			);
 			name = HackerTube;
 			packageProductDependencies = (
-				D50C6F7528956DFC0003D1D0 /* CCCApi */,
+				D50C6F7528956DFC0003D1D0 /* MediaCCCApi */,
 				D5FCC6772FFC42DA00569E27 /* NanoSVG */,
 			);
 			productName = HackerTube;
@@ -783,13 +783,13 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D50C6F7528956DFC0003D1D0 /* CCCApi */ = {
+		D50C6F7528956DFC0003D1D0 /* MediaCCCApi */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = CCCApi;
+			productName = MediaCCCApi;
 		};
-		D591394D2895854100369402 /* CCCApi */ = {
+		D591394D2895854100369402 /* MediaCCCApi */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = CCCApi;
+			productName = MediaCCCApi;
 		};
 		D5FCC6772FFC42DA00569E27 /* NanoSVG */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,6 +1,6 @@
 //
 //  MediaCCCApiClient.swift
-//  CCCApi
+//  MediaCCCApi
 //
 //  Created by Mathijs Bernson on 29/07/2022.
 //
@@ -12,7 +12,7 @@ public final class MediaCCCApiClient {
     private let session: URLSession
     private let baseURL = URL(string: "https://api.media.ccc.de/public")!
     private let decoder = JSONDecoder()
-    private let logger = Logger(subsystem: "eu.bernson.HackerTube.CCCApi", category: "MediaCCCApiClient")
+    private let logger = Logger(subsystem: "de.ccc.media.MediaCCCApi", category: "MediaCCCApiClient")
 
     public init(urlSession: URLSession = .shared) {
         session = urlSession
@@ -32,17 +32,18 @@ public final class MediaCCCApiClient {
     /// `HTTPURLResponse` so callers can read pagination headers.
     private func getWithResponse<T: Decodable>(_ url: URL) async throws -> (T, HTTPURLResponse) {
         logger.info("GET \(url.absoluteString, privacy: .public)")
+        let data: Data
+        let http: HTTPURLResponse
         do {
-            let (data, response) = try await session.data(from: url)
-            let http = response as? HTTPURLResponse
-            let statusCode = http?.statusCode ?? -1
-            logger.info("Response code \(statusCode) \(url.absoluteString, privacy: .public) (\(data.count) bytes)")
-            let decoded = try decoder.decode(T.self, from: data)
-            return (decoded, http ?? HTTPURLResponse())
-        } catch {
+            let (responseData, response) = try await session.data(from: url)
+            data = responseData
+            http = try validate(response, for: url)
+        } catch let error as URLError {
             logger.error("GET \(url.absoluteString, privacy: .public) failed: \(error.localizedDescription, privacy: .public)")
-            throw error
+            throw MediaCCCError.network(error)
         }
+        logger.info("Response code \(http.statusCode) \(url.absoluteString, privacy: .public) (\(data.count) bytes)")
+        return (try decode(data, from: url), http)
     }
 
     /// Performs a form-encoded POST request and decodes the response body.
@@ -54,14 +55,43 @@ public final class MediaCCCApiClient {
         var components = URLComponents()
         components.queryItems = form.map { URLQueryItem(name: $0.key, value: $0.value) }
         request.httpBody = components.percentEncodedQuery?.data(using: .utf8)
+        let data: Data
+        let http: HTTPURLResponse
         do {
-            let (data, response) = try await session.data(for: request)
-            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
-            logger.info("Response code \(statusCode) \(url.absoluteString, privacy: .public) (\(data.count) bytes)")
+            let (responseData, response) = try await session.data(for: request)
+            data = responseData
+            http = try validate(response, for: url)
+        } catch let error as URLError {
+            logger.error("POST \(url.absoluteString, privacy: .public) failed: \(error.localizedDescription, privacy: .public)")
+            throw MediaCCCError.network(error)
+        }
+        logger.info("Response code \(http.statusCode) \(url.absoluteString, privacy: .public) (\(data.count) bytes)")
+        return try decode(data, from: url)
+    }
+
+    // MARK: Response handling
+
+    /// Ensures the response is an HTTP response with a success status code,
+    /// mapping failures to ``MediaCCCError``.
+    private func validate(_ response: URLResponse, for url: URL) throws -> HTTPURLResponse {
+        guard let http = response as? HTTPURLResponse else {
+            logger.error("\(url.absoluteString, privacy: .public) returned a non-HTTP response")
+            throw MediaCCCError.invalidResponse
+        }
+        guard (200..<300).contains(http.statusCode) else {
+            logger.error("\(url.absoluteString, privacy: .public) failed with status \(http.statusCode)")
+            throw MediaCCCError.httpError(statusCode: http.statusCode)
+        }
+        return http
+    }
+
+    /// Decodes the response body, mapping decoding failures to ``MediaCCCError``.
+    private func decode<T: Decodable>(_ data: Data, from url: URL) throws -> T {
+        do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            logger.error("POST \(url.absoluteString, privacy: .public) failed: \(error.localizedDescription, privacy: .public)")
-            throw error
+            logger.error("Decoding \(url.absoluteString, privacy: .public) failed: \(error.localizedDescription, privacy: .public)")
+            throw MediaCCCError.decodingFailed(underlying: error)
         }
     }
 

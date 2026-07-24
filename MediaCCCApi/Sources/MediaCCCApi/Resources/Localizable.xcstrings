@@ -1,0 +1,102 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Couldn't reach media.ccc.de. Check your internet connection and try again." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de konnte nicht erreicht werden. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan media.ccc.de niet bereiken. Controleer je internetverbinding en probeer het opnieuw."
+          }
+        }
+      }
+    },
+    "media.ccc.de sent an unexpected response. Please try again later." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de hat eine unerwartete Antwort gesendet. Bitte versuchen Sie es später erneut."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de gaf een onverwacht antwoord. Probeer het later opnieuw."
+          }
+        }
+      }
+    },
+    "This content couldn't be found on media.ccc.de." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Inhalt konnte auf media.ccc.de nicht gefunden werden."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze inhoud is niet gevonden op media.ccc.de."
+          }
+        }
+      }
+    },
+    "media.ccc.de is having problems right now. Please try again later." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de hat derzeit Probleme. Bitte versuchen Sie es später erneut."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de heeft momenteel problemen. Probeer het later opnieuw."
+          }
+        }
+      }
+    },
+    "media.ccc.de returned an error. Please try again later." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de hat einen Fehler zurückgegeben. Bitte versuchen Sie es später erneut."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "media.ccc.de gaf een foutmelding. Probeer het later opnieuw."
+          }
+        }
+      }
+    },
+    "Received unexpected data from media.ccc.de. Please try again later." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Von media.ccc.de wurden unerwartete Daten empfangen. Bitte versuchen Sie es später erneut."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onverwachte gegevens ontvangen van media.ccc.de. Probeer het later opnieuw."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -5,7 +5,7 @@
 //  Created by Mathijs Bernson on 30/07/2022.
 //
 
-import CCCApi
+import MediaCCCApi
 import SwiftUI
 
 struct ConferencesView: View {
