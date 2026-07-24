@@ -5,7 +5,6 @@
 //  Created by Mathijs Bernson on 29/07/2022.
 //
 
-import AVKit
 import SwiftUI
 import CCCApi
 
@@ -17,11 +16,6 @@ struct HackerTubeApp: App {
         WindowGroup {
             ContentView()
                 .environment(ApiService())
-                .onAppear {
-                    do {
-                        try AVAudioSession.sharedInstance().setCategory(.playback)
-                    } catch {}
-                }
         }
     }
 }
