@@ -6,7 +6,7 @@
 //
 
 import AVFoundation
-import CCCApi
+import MediaCCCApi
 import Foundation
 
 struct MediaAnalyzer {
