@@ -12,8 +12,8 @@ import os.log
 struct VideoPlayerView: UIViewControllerRepresentable {
     let player: AVPlayer?
 
-    func makeUIViewController(context: Context) -> VideoPlayerViewController {
-        let playerViewController = VideoPlayerViewController()
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let playerViewController = AVPlayerViewController()
         playerViewController.delegate = context.coordinator
         playerViewController.modalPresentationStyle = .fullScreen
 
@@ -28,11 +28,13 @@ struct VideoPlayerView: UIViewControllerRepresentable {
         // The playback speeds don't appear on tvOS unless this is explicitly set.
         playerViewController.speeds = AVPlaybackSpeed.systemDefaultSpeeds
 
+        // Persist the user's chosen playback speed as they change it.
+        context.coordinator.observeSelectedSpeed(of: playerViewController)
+
         return playerViewController
     }
 
-    func updateUIViewController(_ playerViewController: VideoPlayerViewController, context: Context)
-    {
+    func updateUIViewController(_ playerViewController: AVPlayerViewController, context: Context) {
         playerViewController.player = player
     }
 
@@ -41,7 +43,7 @@ struct VideoPlayerView: UIViewControllerRepresentable {
     }
 
     static func dismantleUIViewController(
-        _ playerViewController: VideoPlayerViewController, coordinator: Coordinator
+        _ playerViewController: AVPlayerViewController, coordinator: VideoPlayerCoordinator
     ) {
         playerViewController.player?.cancelPendingPrerolls()
         playerViewController.player?.pause()
@@ -52,36 +54,21 @@ class VideoPlayerCoordinator: NSObject, AVPlayerViewControllerDelegate {
     let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier!, category: "VideoPlayerCoordinator")
 
-    func playerViewController(
-        _ playerViewController: AVPlayerViewController,
-        failedToStartPictureInPictureWithError error: Error
-    ) {
-        logger.error("Failed to start picture in picture: \(error)")
-    }
-}
-
-class VideoPlayerViewController: AVPlayerViewController {
     private var selectedSpeedObserver: NSKeyValueObservation?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        selectedSpeedObserver = self.observe(\.selectedSpeed, options: [.new]) { controller, change in
+    func observeSelectedSpeed(of playerViewController: AVPlayerViewController) {
+        selectedSpeedObserver = playerViewController.observe(\.selectedSpeed, options: [.new]) {
+            _, change in
             if let selectedSpeed = change.newValue.flatMap({ $0 }) {
                 UserDefaults.standard.set(selectedSpeed.rate, forKey: UserDefaultsKey.playbackRate.rawValue)
             }
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        UIApplication.shared.isIdleTimerDisabled = true
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        UIApplication.shared.isIdleTimerDisabled = false
+    func playerViewController(
+        _ playerViewController: AVPlayerViewController,
+        failedToStartPictureInPictureWithError error: Error
+    ) {
+        logger.error("Failed to start picture in picture: \(error)")
     }
 }

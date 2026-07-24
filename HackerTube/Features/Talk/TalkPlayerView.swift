@@ -34,6 +34,11 @@ struct TalkPlayerView: View {
             }
             .onDisappear {
                 viewModel.pause()
+                UIApplication.shared.isIdleTimerDisabled = false
+            }
+            .onChange(of: viewModel.isPlaying) { _, isPlaying in
+                // Keep the display awake while playback is in progress.
+                UIApplication.shared.isIdleTimerDisabled = isPlaying
             }
             #if os(iOS)
                 .overlay {
