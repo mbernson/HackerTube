@@ -19,7 +19,6 @@ struct TalkPlayerView: View {
     var body: some View {
         VideoPlayerView(player: viewModel.player)
             .accessibilityIdentifier("Video")
-            .ignoresSafeArea()
             .task(id: recording) {
                 guard recording != viewModel.currentRecording else { return }
 
