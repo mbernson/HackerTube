@@ -11,16 +11,22 @@
       "blur-material" : null,
       "layers" : [
         {
-          "glass" : true,
+          "blend-mode" : "normal",
+          "fill" : "automatic",
+          "glass" : false,
           "image-name" : "3 - Layer.svg",
-          "name" : "3 - Layer"
+          "name" : "Cat"
         },
         {
+          "blend-mode" : "normal",
+          "fill" : "automatic",
           "glass" : true,
+          "hidden" : false,
           "image-name" : "2 - Layer.svg",
-          "name" : "2 - Layer"
+          "name" : "Background"
         }
       ],
+      "name" : "Voctocat",
       "shadow" : {
         "kind" : "neutral",
         "opacity" : 0.5
