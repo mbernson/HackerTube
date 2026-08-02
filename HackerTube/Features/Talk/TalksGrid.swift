@@ -39,10 +39,10 @@ private struct TalksGridRegular: View {
                             .hoverEffect(.lift)
                         #endif
                 }
-                .buttonStyle(.plain)
             }
         }
         .padding()
+        .buttonStyle(.plain)
         .multilineTextAlignment(.center)
         .accessibilityIdentifier("TalksGrid")
         .accessibilityElement(children: .contain)
@@ -61,23 +61,20 @@ private struct TalksGridRegular: View {
         var body: some View {
             LazyVGrid(columns: columns, spacing: 64) {
                 ForEach(talks) { talk in
-                    VStack(alignment: .leading) {
-                        NavigationLink {
-                            TalkView(talk: talk)
-                        } label: {
-                            TalkThumbnail(talk: talk)
-                        }
+                    NavigationLink {
+                        TalkView(talk: talk)
+                    } label: {
+                        TalkThumbnail(talk: talk)
 
                         Text(talk.title)
-                            .font(.headline)
                             .lineLimit(2, reservesSpace: true)
                     }
                 }
             }
             .padding()
-            .multilineTextAlignment(.leading)
+            .multilineTextAlignment(.center)
             .focusSection()
-            .buttonStyle(.card)
+            .buttonStyle(.borderless)
             .accessibilityIdentifier("TalksGrid")
             .accessibilityElement(children: .contain)
         }
