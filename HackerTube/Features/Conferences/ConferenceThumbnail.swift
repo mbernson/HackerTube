@@ -17,9 +17,9 @@ struct ConferenceThumbnail: View {
 
     var body: some View {
         thumbnail
+            .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .aspectRatio(16 / 9, contentMode: .fit)
-            .background(.regularMaterial)
             .id(id)
     }
 

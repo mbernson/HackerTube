@@ -54,22 +54,21 @@ private struct ConferencesGridRegular: View {
     private struct ConferencesGridTV: View {
         let conferences: [Conference]
         let columns: [GridItem] = Array(
-            repeating: GridItem(.flexible(minimum: 300), spacing: 48),
+            repeating: GridItem(.flexible(minimum: 320), spacing: 48),
             count: 4
         )
 
         var body: some View {
             LazyVGrid(columns: columns, spacing: 64) {
                 ForEach(conferences) { conference in
-                    VStack {
-                        NavigationLink {
-                            ConferenceView(conference: conference)
-                        } label: {
-                            ConferenceThumbnail(conference: conference)
-                        }
+                    NavigationLink {
+                        ConferenceView(conference: conference)
+                    } label: {
+                        ConferenceThumbnail(conference: conference)
+                            .background(.primary)
+                            .hoverEffect(.highlight)
 
                         Text(conference.title)
-                            .font(.headline)
                             .lineLimit(2, reservesSpace: true)
                     }
                 }
@@ -77,7 +76,7 @@ private struct ConferencesGridRegular: View {
             .padding()
             .multilineTextAlignment(.center)
             .focusSection()
-            .buttonStyle(.card)
+            .buttonStyle(.borderless)
             .accessibilityIdentifier("ConferencesGrid")
             .accessibilityElement(children: .contain)
         }
