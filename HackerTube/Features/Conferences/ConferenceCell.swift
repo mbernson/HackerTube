@@ -16,12 +16,14 @@ struct ConferenceCell: View {
         VStack {
             if #available(iOS 26.0, *) {
                 ConferenceThumbnail(conference: conference)
+                    .background(.background.secondary)
                     .clipShape(ConcentricRectangle(
                         corners: .concentric,
                         isUniform: true
                     ))
             } else {
                 ConferenceThumbnail(conference: conference)
+                    .background(.background.secondary)
             }
 
             Text(conference.title)
