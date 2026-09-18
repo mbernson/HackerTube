@@ -52,9 +52,10 @@ private struct TalkViewDefault: View {
 
     var body: some View {
         VStack {
-            TalkVideoPlayerView(talk: talk, preferredRecording: viewModel.preferredRecording)
-                .frame(maxWidth: 1024)
-                .frame(maxWidth: .infinity, alignment: .center)
+            TalkVideoPlayerView(
+                talk: talk,
+                preferredRecording: viewModel.preferredRecording
+            )
 
             Picker("Mode", selection: $selectedDetailPane) {
                 Text("About").tag(TalkDetailPane.about)
