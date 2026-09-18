@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 110;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,6 +60,7 @@
 		D5AFD6F62C9BFCF700BF89F5 /* Exceptions for "HackerTube" folder in "HackerTube" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Configuration/HackerTube.xcconfig,
 				Info.plist,
 			);
 			target = D5A156D3289462B3006989FF /* HackerTube */;
@@ -235,7 +236,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					D591393E2895851300369402 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -262,7 +263,7 @@
 			packageReferences = (
 				D5FCC6762FFC42DA00569E27 /* XCLocalSwiftPackageReference "NanoSVG" */,
 			);
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 110;
 			productRefGroup = D5A156D5289462B3006989FF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
