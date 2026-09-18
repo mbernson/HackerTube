@@ -30,13 +30,6 @@
 			remoteGlobalIDString = D5A156D3289462B3006989FF;
 			remoteInfo = HackerTube;
 		};
-		D5EFB1A22B407683008CFE82 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D5A156CC289462B3006989FF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D5A156D3289462B3006989FF;
-			remoteInfo = HackerTube;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,9 +52,7 @@
 		D59139402895851300369402 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		D591395928958B2600369402 /* HackerTubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerTubeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A156D4289462B3006989FF /* HackerTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5D2CB292D43EBB300E08E44 /* Screenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Screenshots.xctestplan; sourceTree = "<group>"; };
 		D5D2CB2A2D43EBB300E08E44 /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
-		D5EFB19C2B407683008CFE82 /* HackerTubeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerTubeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F872242DFC3F35002D2F28 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,11 +95,6 @@
 			path = HackerTubeTests;
 			sourceTree = "<group>";
 		};
-		D5AFD7052C9BFD1100BF89F5 /* HackerTubeUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = HackerTubeUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,11 +117,6 @@
 				D5FCC6782FFC42DA00569E27 /* NanoSVG in Frameworks */,
 			);
 		};
-		D5EFB1992B407683008CFE82 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -151,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				D557E8BA2896F70400342EE2 /* README.md */,
-				D5D2CB292D43EBB300E08E44 /* Screenshots.xctestplan */,
 				D5F872242DFC3F35002D2F28 /* AppIcon.icon */,
 				D5D2CB2A2D43EBB300E08E44 /* UnitTests.xctestplan */,
 				D5AFD6D92C9BFCF700BF89F5 /* HackerTube */,
@@ -159,7 +139,6 @@
 				D574ECF72FFC42FA0050AF63 /* NanoSVG */,
 				D5AFD6FB2C9BFCFB00BF89F5 /* TopShelf */,
 				D5AFD7022C9BFD0F00BF89F5 /* HackerTubeTests */,
-				D5AFD7052C9BFD1100BF89F5 /* HackerTubeUITests */,
 				D5A156D5289462B3006989FF /* Products */,
 				D50C6F7428956DFC0003D1D0 /* Frameworks */,
 			);
@@ -173,7 +152,6 @@
 				D5A156D4289462B3006989FF /* HackerTube.app */,
 				D591393F2895851300369402 /* TopShelf.appex */,
 				D591395928958B2600369402 /* HackerTubeTests.xctest */,
-				D5EFB19C2B407683008CFE82 /* HackerTubeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,27 +227,6 @@
 			productReference = D5A156D4289462B3006989FF /* HackerTube.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D5EFB19B2B407683008CFE82 /* HackerTubeUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D5EFB1A62B407683008CFE82 /* Build configuration list for PBXNativeTarget "HackerTubeUITests" */;
-			buildPhases = (
-				D5EFB1982B407683008CFE82 /* Sources */,
-				D5EFB1992B407683008CFE82 /* Frameworks */,
-				D5EFB19A2B407683008CFE82 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D5EFB1A32B407683008CFE82 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				D5AFD7052C9BFD1100BF89F5 /* HackerTubeUITests */,
-			);
-			name = HackerTubeUITests;
-			productName = HackerTubeUITests;
-			productReference = D5EFB19C2B407683008CFE82 /* HackerTubeUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -289,10 +246,6 @@
 					};
 					D5A156D3289462B3006989FF = {
 						CreatedOnToolsVersion = 13.4.1;
-					};
-					D5EFB19B2B407683008CFE82 = {
-						CreatedOnToolsVersion = 15.1;
-						TestTargetID = D5A156D3289462B3006989FF;
 					};
 				};
 			};
@@ -317,7 +270,6 @@
 				D5A156D3289462B3006989FF /* HackerTube */,
 				D591393E2895851300369402 /* TopShelf */,
 				D591395828958B2600369402 /* HackerTubeTests */,
-				D5EFB19B2B407683008CFE82 /* HackerTubeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -339,11 +291,6 @@
 				D5F872252DFC3F3F002D2F28 /* AppIcon.icon in Resources */,
 			);
 		};
-		D5EFB19A2B407683008CFE82 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-			);
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -358,11 +305,6 @@
 			);
 		};
 		D5A156D0289462B3006989FF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-			);
-		};
-		D5EFB1982B407683008CFE82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 			);
@@ -382,11 +324,6 @@
 			isa = PBXTargetDependency;
 			target = D5A156D3289462B3006989FF /* HackerTube */;
 			targetProxy = D591395D28958B2600369402 /* PBXContainerItemProxy */;
-		};
-		D5EFB1A32B407683008CFE82 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D5A156D3289462B3006989FF /* HackerTube */;
-			targetProxy = D5EFB1A22B407683008CFE82 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -628,6 +565,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HackerTube/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HackerTube;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -669,6 +607,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HackerTube/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HackerTube;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -688,45 +627,6 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2,3,6,7";
-			};
-			name = Release;
-		};
-		D5EFB1A42B407683008CFE82 /* Debug configuration for PBXNativeTarget "HackerTubeUITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTubeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				TARGETED_DEVICE_FAMILY = "1,2,3";
-				TEST_TARGET_NAME = HackerTube;
-			};
-			name = Debug;
-		};
-		D5EFB1A52B407683008CFE82 /* Release configuration for PBXNativeTarget "HackerTubeUITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = nl.bernson.CCCTubeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				TARGETED_DEVICE_FAMILY = "1,2,3";
-				TEST_TARGET_NAME = HackerTube;
 			};
 			name = Release;
 		};
@@ -762,14 +662,6 @@
 			buildConfigurations = (
 				D5A156E3289462B3006989FF /* Debug configuration for PBXNativeTarget "HackerTube" */,
 				D5A156E4289462B3006989FF /* Release configuration for PBXNativeTarget "HackerTube" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		D5EFB1A62B407683008CFE82 /* Build configuration list for PBXNativeTarget "HackerTubeUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D5EFB1A42B407683008CFE82 /* Debug configuration for PBXNativeTarget "HackerTubeUITests" */,
-				D5EFB1A52B407683008CFE82 /* Release configuration for PBXNativeTarget "HackerTubeUITests" */,
 			);
 			defaultConfigurationName = Release;
 		};
