@@ -11,20 +11,29 @@ import MediaCCCApi
 struct TalkVideoPlayerView: View {
     let talk: Talk
     let preferredRecording: Recording?
+    var aspectRatio: CGFloat {
+        if let recording = preferredRecording, let width = recording.width, let height = recording.height {
+            let size = CGSize(width: width, height: height)
+            return size.width / size.height
+        } else {
+            return 16 / 9
+        }
+    }
 
     var body: some View {
         Group {
             if let preferredRecording {
                 TalkPlayerView(
-                    talk: talk, recording: preferredRecording,
-                    automaticallyStartsPlayback: true)
+                    talk: talk,
+                    recording: preferredRecording,
+                    automaticallyStartsPlayback: true
+                )
             } else {
                 Rectangle()
                     .fill(.black)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .aspectRatio(16 / 9, contentMode: .fit)
+        .aspectRatio(aspectRatio, contentMode: .fit)
     }
 }
 
