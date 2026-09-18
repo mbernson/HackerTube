@@ -8,7 +8,7 @@
 import Foundation
 import os.log
 
-public final class MediaCCCApiClient {
+public final class MediaCCCApiClient: Sendable {
     private let session: URLSession
     private let baseURL = URL(string: "https://api.media.ccc.de/public")!
     private let decoder = JSONDecoder()
