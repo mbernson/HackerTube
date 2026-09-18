@@ -1,6 +1,6 @@
 # HackerTube
 
-<img width="128" height="128" align="right" alt="HackerTube icon" src="https://github.com/user-attachments/assets/9415d24b-9554-4045-b60a-ed86e6c79cd2" />
+<img width="128" height="128" align="right" alt="HackerTube icon" src="https://github.com/user-attachments/assets/3e54c346-a57e-4196-8bc0-8da6a9a5ba8f" />
 
 HackerTube is an app for watching the talks and activities of the Chaos Computer Club and related conferences on tvOS (Apple TV), iOS and macOS. It is a client that uses the public REST API of [media.ccc.de](https://media.ccc.de/). It is free software (GPL licensed) and is not officially affiliated with the CCC.
 
