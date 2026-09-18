@@ -19,7 +19,7 @@ struct TalkView: View {
             #if os(tvOS)
             TalkViewTV(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
             #else
-            TalkViewInner(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
+            TalkViewDefault(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
             #endif
         }
         .task(id: talk) {
@@ -37,8 +37,9 @@ struct TalkView: View {
     }
 }
 
+/// Talk View for use on all platforms by default.
 @available(tvOS, unavailable)
-private struct TalkViewInner: View {
+private struct TalkViewDefault: View {
     let talk: Talk
     @Binding var selectedRecording: Recording?
     var viewModel: TalkViewModel
@@ -51,9 +52,10 @@ private struct TalkViewInner: View {
 
     var body: some View {
         VStack {
-            TalkVideoPlayerView(talk: talk, preferredRecording: viewModel.preferredRecording)
-                .frame(maxWidth: 1024)
-                .frame(maxWidth: .infinity, alignment: .center)
+            TalkVideoPlayerView(
+                talk: talk,
+                preferredRecording: viewModel.preferredRecording
+            )
 
             Picker("Mode", selection: $selectedDetailPane) {
                 Text("About").tag(TalkDetailPane.about)
@@ -76,6 +78,7 @@ private struct TalkViewInner: View {
     }
 }
 
+/// Talk View that is specific to tvOS.
 @available(iOS, unavailable)
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
