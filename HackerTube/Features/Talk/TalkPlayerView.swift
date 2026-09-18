@@ -56,8 +56,8 @@ struct TalkPlayerView: View {
                 .progressViewStyle(.circular)
                 .controlSize(.large)
                 .padding(10)
-                .background(.regularMaterial)
-                .clipShape(Circle())
+                .background(in: Circle())
+                .backgroundStyle(.regularMaterial)
         }
     }
 #endif

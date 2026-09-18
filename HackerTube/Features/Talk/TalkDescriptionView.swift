@@ -25,13 +25,13 @@ struct TalkDescriptionView: View {
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
         let maxNumberOfLines = 5
 
-        if shortened, let shortDescription = paragraphs.first, paragraphs.count > 1 {
+        if shortened, let shortDescription = paragraphs.first {
             VStack(alignment: .leading, spacing: 20) {
                 #if os(tvOS)
                     Button {
                         presentTalkDescription()
                     } label: {
-                        Text(description)
+                        Text(shortDescription)
                             .lineLimit(maxNumberOfLines)
                     }
                     .buttonStyle(.plain)
@@ -73,12 +73,17 @@ private struct TalkDescriptionSheetView: View {
 
     var body: some View {
         ScrollView {
-            Text(description)
-                .font(.body)
-                .multilineTextAlignment(.leading)
-                .padding()
+            VStack(alignment: .leading) {
+                Text(talk.title)
+                    .font(.headline)
+                    .padding(.bottom)
+
+                Text(description)
+                    .font(.body)
+            }
+            .multilineTextAlignment(.leading)
+            .padding()
         }
-        .navigationTitle(talk.title)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Done", role: .cancel) {
