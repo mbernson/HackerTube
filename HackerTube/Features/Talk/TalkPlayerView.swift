@@ -8,60 +8,28 @@
 import MediaCCCApi
 import SwiftUI
 
+/// Shows the app-wide shared player. What it plays is controlled by the ``PlaybackController``.
 struct TalkPlayerView: View {
-    let talk: Talk
-    let recording: Recording
-    let automaticallyStartsPlayback: Bool
+    /// The talk this view is shown for, or `nil` when it shows whatever is playing (the full-screen player on tvOS and visionOS).
+    var talk: Talk? = nil
 
-    @State private var isLoading = false
-    @State private var viewModel = TalkPlayerViewModel()
+    @Environment(PlaybackController.self) private var playback
 
     var body: some View {
-        VideoPlayerView(player: viewModel.player)
+        VideoPlayerView(playback: playback)
             .accessibilityIdentifier("Video")
-            .task(id: recording) {
-                guard recording != viewModel.currentRecording else { return }
-
-                isLoading = true
-                await viewModel.prepareForPlayback(recording: recording, talk: talk)
-                if automaticallyStartsPlayback {
-                    viewModel.play()
-                } else {
-                    await viewModel.preroll()
-                }
-                isLoading = false
-            }
             .onDisappear {
-                viewModel.pause()
-                UIApplication.shared.isIdleTimerDisabled = false
-            }
-            .onChange(of: viewModel.isPlaying) { _, isPlaying in
-                // Keep the display awake while playback is in progress.
-                UIApplication.shared.isIdleTimerDisabled = isPlaying
-            }
-            #if os(iOS)
-                .overlay {
-                    if isLoading {
-                        VideoProgressIndicator()
-                    }
+                // Keep playing when the video continues in Picture in Picture, or when the shared player has
+                // already moved on to another talk (that is why this view is being removed).
+                let showsCurrentTalk = talk == nil || playback.currentTalk?.id == talk?.id
+                if showsCurrentTalk && !playback.isPictureInPictureActive {
+                    playback.pause()
                 }
-            #endif
+            }
     }
 }
 
-#if os(iOS)
-    private struct VideoProgressIndicator: View {
-        var body: some View {
-            ProgressView()
-                .progressViewStyle(.circular)
-                .controlSize(.large)
-                .padding(10)
-                .background(in: Circle())
-                .backgroundStyle(.regularMaterial)
-        }
-    }
-#endif
-
 #Preview {
-    TalkPlayerView(talk: .example, recording: .example, automaticallyStartsPlayback: false)
+    TalkPlayerView()
+        .environment(PlaybackController())
 }

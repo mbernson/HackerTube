@@ -24,6 +24,7 @@ enum EventsQuery: Equatable {
 
 struct BrowseView: View {
     let query: EventsQuery
+    @Binding var path: [Destination]
     @State var year: Int = Calendar.current.component(.year, from: .now)
     @State var talks: [Talk] = []
     @State var isLoading = true
@@ -31,7 +32,7 @@ struct BrowseView: View {
     @Environment(ApiService.self) var api
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 #if os(tvOS)
                     if query == .popular {
@@ -80,6 +81,7 @@ struct BrowseView: View {
                 await refresh()
             }
             .alert("Failed to load data from the media.ccc.de API", error: $error)
+            .appDestinations()
         }
     }
 
@@ -113,5 +115,6 @@ private struct YearPicker: View {
 }
 
 #Preview {
-    BrowseView(query: .popular, talks: [.example])
+    BrowseView(query: .popular, path: .constant([]), talks: [.example])
+        .environment(ApiService())
 }

@@ -71,6 +71,13 @@
 			);
 			target = D591393E2895851300369402 /* TopShelf */;
 		};
+		D5E0A1B22EC7F00100DEE71A /* Exceptions for "HackerTube" folder in "TopShelf" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Domain/DeepLink.swift,
+			);
+			target = D591393E2895851300369402 /* TopShelf */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -78,6 +85,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				D5AFD6F62C9BFCF700BF89F5 /* Exceptions for "HackerTube" folder in "HackerTube" target */,
+				D5E0A1B22EC7F00100DEE71A /* Exceptions for "HackerTube" folder in "TopShelf" target */,
 			);
 			path = HackerTube;
 			sourceTree = "<group>";

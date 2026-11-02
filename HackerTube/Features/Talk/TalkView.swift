@@ -10,14 +10,17 @@ import SwiftUI
 
 struct TalkView: View {
     let talk: Talk
-    @State var selectedRecording: Recording?
+    /// Whether playback of the preferred recording starts as soon as it is known.
+    var autoplay = false
+    @State private var selectedRecording: Recording?
     @State private var viewModel = TalkViewModel()
     @State private var error: Error?
+    @Environment(AppCoordinator.self) private var coordinator
 
     var body: some View {
         Group {
-            #if os(tvOS)
-            TalkViewTV(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
+            #if os(tvOS) || os(visionOS)
+            TalkViewTV(talk: talk, viewModel: viewModel)
             #else
             TalkViewDefault(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
             #endif
@@ -26,6 +29,9 @@ struct TalkView: View {
             guard talk != viewModel.currentTalk else { return }
             do {
                 try await viewModel.loadRecordings(for: talk)
+                if autoplay, let recording = viewModel.preferredRecording {
+                    coordinator.play(talk: talk, recording: recording)
+                }
             } catch is CancellationError {
             } catch {
                 self.error = error
@@ -37,8 +43,7 @@ struct TalkView: View {
     }
 }
 
-/// Talk View for use on all platforms by default.
-@available(tvOS, unavailable)
+/// Talk View with an inline player, used on iOS and macOS.
 private struct TalkViewDefault: View {
     let talk: Talk
     @Binding var selectedRecording: Recording?
@@ -73,20 +78,17 @@ private struct TalkViewDefault: View {
                     TalkMetadataDetailPane(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
                 }
             }
-            .safeAreaPadding(.all)
+            .safeAreaPadding()
         }
     }
 }
 
-/// Talk View that is specific to tvOS.
-@available(iOS, unavailable)
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
+/// Talk View that is specific to tvOS and visionOS.
 private struct TalkViewTV: View {
     let talk: Talk
-    @Binding var selectedRecording: Recording?
     var viewModel: TalkViewModel
+    @Environment(AppCoordinator.self) private var coordinator
+    @FocusState private var isWatchButtonFocused: Bool
 
     var body: some View {
         ScrollView {
@@ -110,12 +112,15 @@ private struct TalkViewTV: View {
                 HStack(alignment: .top) {
                     VStack {
                         Button {
-                            selectedRecording = viewModel.preferredRecording
+                            if let recording = viewModel.preferredRecording {
+                                coordinator.play(talk: talk, recording: recording)
+                            }
                         } label: {
                             Label("Watch", systemImage: "play.fill")
                                 .padding(.horizontal, 64)
                         }
                         .disabled(viewModel.preferredRecording == nil)
+                        .focused($isWatchButtonFocused)
                     }
 
                     VStack(alignment: .leading) {
@@ -149,16 +154,27 @@ private struct TalkViewTV: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
+            #if os(visionOS)
+            .safeAreaPadding()
+            #endif
         }
-        .fullScreenCover(item: $selectedRecording) { recording in
-            TalkPlayerView(talk: talk, recording: recording, automaticallyStartsPlayback: true)
-                .ignoresSafeArea()
+        .onChange(of: viewModel.preferredRecording != nil) { _, canWatch in
+            // Move focus into the content once the Watch button is enabled. Without this, focus can remain on the
+            // tab bar, e.g. when the talk was opened from a deep link, and Menu would then exit the app.
+            guard canWatch else { return }
+            Task { @MainActor in
+                isWatchButtonFocused = true
+            }
         }
     }
 }
 
 #Preview {
+    let playback = PlaybackController()
     NavigationStack {
         TalkView(talk: .example)
     }
+    .environment(ApiService())
+    .environment(playback)
+    .environment(AppCoordinator(playback: playback))
 }

@@ -9,6 +9,7 @@ import MediaCCCApi
 import SwiftUI
 
 struct ConferencesView: View {
+    @Binding var path: [Destination]
     @State var conferences: [Conference] = []
     @State var filterQuery = ""
     @State var isLoading = true
@@ -16,7 +17,7 @@ struct ConferencesView: View {
     @Environment(ApiService.self) var api
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 let filterQuery = filterQuery.lowercased()
                 let conferences: [Conference] = filterQuery.isEmpty
@@ -44,6 +45,7 @@ struct ConferencesView: View {
                 await refresh()
             }
             .alert("Failed to load data from the media.ccc.de API", error: $error)
+            .appDestinations()
         }
     }
 
@@ -67,5 +69,6 @@ struct ConferencesView: View {
 }
 
 #Preview {
-    ConferencesView()
+    ConferencesView(path: .constant([]))
+        .environment(ApiService())
 }

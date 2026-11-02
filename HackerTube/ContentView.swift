@@ -5,73 +5,49 @@
 //  Created by Mathijs Bernson on 29/07/2022.
 //
 
-import MediaCCCApi
 import SwiftUI
 
 struct ContentView: View {
-    @State private var talk: TalkToPlay?
-    @State var error: Error?
-    @Environment(ApiService.self) var api
+    @Environment(AppCoordinator.self) private var coordinator
 
     var body: some View {
-        TabView {
-            Tab("Recent", systemImage: "clock") {
-                BrowseView(query: .recent)
+        @Bindable var coordinator = coordinator
+
+        TabView(selection: $coordinator.selectedTab) {
+            Tab("Recent", systemImage: "clock", value: AppTab.recent) {
+                BrowseView(query: .recent, path: coordinator.path(for: .recent))
             }
 
-            Tab("Popular", systemImage: "popcorn") {
-                BrowseView(query: .popular)
+            Tab("Popular", systemImage: "popcorn", value: AppTab.popular) {
+                BrowseView(query: .popular, path: coordinator.path(for: .popular))
             }
 
-            Tab("Conferences", systemImage: "star") {
-                ConferencesView()
+            Tab("Conferences", systemImage: "star", value: AppTab.conferences) {
+                ConferencesView(path: coordinator.path(for: .conferences))
             }
 
-            Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                SearchView()
+            Tab("Search", systemImage: "magnifyingglass", value: AppTab.search, role: .search) {
+                SearchView(path: coordinator.path(for: .search))
             }
         }
-        .alert("Failed to load data from the media.ccc.de API", error: $error)
-        .fullScreenCover(item: $talk) { talk in
-            NavigationStack {
-                TalkView(talk: talk.talk, selectedRecording: talk.recordingToPlay)
+        #if os(tvOS) || os(visionOS)
+            .fullScreenCover(isPresented: $coordinator.isPlayerPresented) {
+                TalkPlayerView()
+                    .ignoresSafeArea()
             }
-        }
+        #endif
         .onOpenURL { url in
-            let factory = URLParser()
-            guard let route = factory.parseURL(url) else { return }
-            Task {
-                await openRoute(route: route)
+            if let link = DeepLink(url: url) {
+                coordinator.open(link)
             }
         }
     }
-
-    func openRoute(route: URLRoute) async {
-        do {
-            switch route {
-            case .openTalk(let id):
-                let talk = try await api.talk(id: id)
-                self.talk = TalkToPlay(talk: talk, recordingToPlay: nil)
-            case .playTalk(let id):
-                let talk = try await api.talk(id: id)
-                let recordings = try await api.recordings(for: talk)
-                let recording =
-                    recordings.first(where: { $0.isHighQuality })
-                    ?? recordings.first(where: { $0.isVideo })
-                self.talk = TalkToPlay(talk: talk, recordingToPlay: recording)
-            }
-        } catch {
-            self.error = error
-        }
-    }
-}
-
-private struct TalkToPlay: Identifiable {
-    let id: Int = 1
-    let talk: Talk
-    let recordingToPlay: Recording?
 }
 
 #Preview {
+    let playback = PlaybackController()
     ContentView()
+        .environment(ApiService())
+        .environment(playback)
+        .environment(AppCoordinator(playback: playback))
 }

@@ -31,10 +31,8 @@ struct TopShelfContentFactory {
         item.imageShape = .hdtv
         item.title = talk.title
         item.setImageURL(talk.posterURL, for: .screenScale1x)
-        item.displayAction = URL(string: "ccctube://talk/\(talk.id)")
-            .map(TVTopShelfAction.init)
-        item.playAction = URL(string: "ccctube://talk/\(talk.id)/play")
-            .map(TVTopShelfAction.init)
+        item.displayAction = TVTopShelfAction(url: DeepLink.talk(id: talk.id, action: .open).url)
+        item.playAction = TVTopShelfAction(url: DeepLink.talk(id: talk.id, action: .play).url)
         return item
     }
 }
