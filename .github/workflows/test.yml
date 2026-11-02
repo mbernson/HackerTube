@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  XCODE_VERSION: '26'
+  XCODE_VERSION: '27'
   XCODE_PROJECT: "HackerTube.xcodeproj"
   SCHEME: "HackerTube"
   TEST_PLAN: UnitTests
@@ -15,18 +15,19 @@ env:
 jobs:
   build:
     name: Test on ${{ matrix.name }}
-    runs-on: macos-latest
+    runs-on: xcode-27
 
     strategy:
       fail-fast: false
       matrix:
         include:
+          # Run `xcrun simctl list devicetypes` to see available simulator device types
           - name: iOS Simulator
             platform: 'iOS Simulator'
             device_type: 'iPhone 17'
           - name: tvOS Simulator
             platform: 'tvOS Simulator'
-            device_type: 'Apple TV'
+            device_type: 'Apple TV 4K (3rd generation)'
 
     env:
       TEST_DEVICE_NAME: 'TestDevice'
