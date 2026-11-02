@@ -30,7 +30,7 @@ struct ContentView: View {
                 SearchView(path: coordinator.path(for: .search))
             }
         }
-        #if os(tvOS)
+        #if os(tvOS) || os(visionOS)
             .fullScreenCover(isPresented: $coordinator.isPlayerPresented) {
                 TalkPlayerView()
                     .ignoresSafeArea()

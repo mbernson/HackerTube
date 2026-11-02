@@ -10,7 +10,7 @@ import SwiftUI
 
 /// Shows the app-wide shared player. What it plays is controlled by the ``PlaybackController``.
 struct TalkPlayerView: View {
-    /// The talk this view is shown for, or `nil` when it shows whatever is playing (the tvOS full-screen player).
+    /// The talk this view is shown for, or `nil` when it shows whatever is playing (the full-screen player on tvOS and visionOS).
     var talk: Talk? = nil
 
     @Environment(PlaybackController.self) private var playback

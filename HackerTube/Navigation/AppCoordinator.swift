@@ -18,7 +18,7 @@ final class AppCoordinator {
     var selectedTab: AppTab = .recent
     var paths: [AppTab: [Destination]] = [:]
 
-    /// Whether the full-screen player is presented. Only used on tvOS; other platforms play inline.
+    /// Whether the full-screen player is presented. Only used on tvOS and visionOS; other platforms play inline.
     var isPlayerPresented = false
 
     @ObservationIgnored
@@ -48,7 +48,7 @@ final class AppCoordinator {
     // MARK: Playback
 
     func play(talk: Talk, recording: Recording) {
-        #if os(tvOS)
+        #if os(tvOS) || os(visionOS)
             // Keep a talk that is already playing in Picture in Picture there. A different talk closes the PiP
             // window (see `PlaybackController.load`) and plays full screen.
             let isAlreadyInPictureInPicture =
@@ -67,7 +67,7 @@ final class AppCoordinator {
         if currentPath.last?.talkID != talk.id {
             push(.talk(talk))
         }
-        #if os(tvOS)
+        #if os(tvOS) || os(visionOS)
             isPlayerPresented = true
         #endif
     }

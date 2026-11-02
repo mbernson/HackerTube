@@ -23,6 +23,10 @@ struct VideoPlayerView: UIViewControllerRepresentable {
             playerViewController.allowsPictureInPicturePlayback = false
             playerViewController.appliesPreferredDisplayCriteriaAutomatically = true
             playerViewController.transportBarIncludesTitleView = true
+        #elseif os(visionOS)
+            // visionOS plays full screen, like tvOS, and the coordinator's presentation logic assumes no
+            // Picture in Picture there.
+            playerViewController.allowsPictureInPicturePlayback = false
         #else
             playerViewController.allowsPictureInPicturePlayback = true
             playerViewController.canStartPictureInPictureAutomaticallyFromInline = true

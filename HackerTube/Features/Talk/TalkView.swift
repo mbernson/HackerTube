@@ -19,7 +19,7 @@ struct TalkView: View {
 
     var body: some View {
         Group {
-            #if os(tvOS)
+            #if os(tvOS) || os(visionOS)
             TalkViewTV(talk: talk, viewModel: viewModel)
             #else
             TalkViewDefault(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
@@ -43,8 +43,7 @@ struct TalkView: View {
     }
 }
 
-/// Talk View for use on all platforms by default.
-@available(tvOS, unavailable)
+/// Talk View with an inline player, used on iOS and macOS.
 private struct TalkViewDefault: View {
     let talk: Talk
     @Binding var selectedRecording: Recording?
@@ -79,16 +78,12 @@ private struct TalkViewDefault: View {
                     TalkMetadataDetailPane(talk: talk, selectedRecording: $selectedRecording, viewModel: viewModel)
                 }
             }
-            .safeAreaPadding(.all)
+            .safeAreaPadding()
         }
     }
 }
 
-/// Talk View that is specific to tvOS.
-@available(iOS, unavailable)
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
+/// Talk View that is specific to tvOS and visionOS.
 private struct TalkViewTV: View {
     let talk: Talk
     var viewModel: TalkViewModel
@@ -159,6 +154,9 @@ private struct TalkViewTV: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
+            #if os(visionOS)
+            .safeAreaPadding()
+            #endif
         }
         .onChange(of: viewModel.preferredRecording != nil) { _, canWatch in
             // Move focus into the content once the Watch button is enabled. Without this, focus can remain on the
