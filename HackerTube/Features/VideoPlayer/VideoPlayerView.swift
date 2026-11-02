@@ -7,21 +7,24 @@
 
 import AVKit
 import SwiftUI
-import os.log
 
 struct VideoPlayerView: UIViewControllerRepresentable {
-    let player: AVPlayer?
+    let playback: PlaybackController
 
     func makeUIViewController(context: Context) -> AVPlayerViewController {
         let playerViewController = AVPlayerViewController()
-        playerViewController.delegate = context.coordinator
+        // The delegate is owned by the playback controller, so it outlives this view while in Picture in Picture.
+        playerViewController.delegate = playback.playerViewControllerDelegate
         playerViewController.modalPresentationStyle = .fullScreen
 
-        playerViewController.allowsPictureInPicturePlayback = true
         #if os(tvOS)
+            // Picture in Picture is deliberately disabled on tvOS: talks are mostly slides, which are unreadable in
+            // a small window on a TV, and watching on a TV is a single-task activity.
+            playerViewController.allowsPictureInPicturePlayback = false
             playerViewController.appliesPreferredDisplayCriteriaAutomatically = true
             playerViewController.transportBarIncludesTitleView = true
         #else
+            playerViewController.allowsPictureInPicturePlayback = true
             playerViewController.canStartPictureInPictureAutomaticallyFromInline = true
         #endif
 
@@ -35,26 +38,25 @@ struct VideoPlayerView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ playerViewController: AVPlayerViewController, context: Context) {
-        playerViewController.player = player
+        if playerViewController.player !== playback.player {
+            playerViewController.player = playback.player
+        }
     }
 
     func makeCoordinator() -> VideoPlayerCoordinator {
-        VideoPlayerCoordinator()
-    }
-
-    static func dismantleUIViewController(
-        _ playerViewController: AVPlayerViewController, coordinator: VideoPlayerCoordinator
-    ) {
-        playerViewController.player?.cancelPendingPrerolls()
-        playerViewController.player?.pause()
+        VideoPlayerCoordinator(playback: playback)
     }
 }
 
-class VideoPlayerCoordinator: NSObject, AVPlayerViewControllerDelegate {
-    let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!, category: "VideoPlayerCoordinator")
+@MainActor
+class VideoPlayerCoordinator: NSObject {
+    let playback: PlaybackController
 
     private var selectedSpeedObserver: NSKeyValueObservation?
+
+    init(playback: PlaybackController) {
+        self.playback = playback
+    }
 
     func observeSelectedSpeed(of playerViewController: AVPlayerViewController) {
         selectedSpeedObserver = playerViewController.observe(\.selectedSpeed, options: [.new]) {
@@ -63,12 +65,5 @@ class VideoPlayerCoordinator: NSObject, AVPlayerViewControllerDelegate {
                 UserDefaults.standard.set(selectedSpeed.rate, forKey: UserDefaultsKey.playbackRate.rawValue)
             }
         }
-    }
-
-    func playerViewController(
-        _ playerViewController: AVPlayerViewController,
-        failedToStartPictureInPictureWithError error: Error
-    ) {
-        logger.error("Failed to start picture in picture: \(error)")
     }
 }

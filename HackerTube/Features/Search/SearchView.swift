@@ -9,6 +9,7 @@ import MediaCCCApi
 import SwiftUI
 
 struct SearchView: View {
+    @Binding var path: [Destination]
     @State var searchContext = SearchContext()
     @State var results: [Talk] = []
     @State var query = ""
@@ -18,14 +19,12 @@ struct SearchView: View {
     @Environment(ApiService.self) var api
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Group {
                 #if os(tvOS)
                     List {
                         ForEach(results) { talk in
-                            NavigationLink {
-                                TalkView(talk: talk)
-                            } label: {
+                            NavigationLink(value: Destination.talk(talk)) {
                                 TalkListItem(talk: talk)
                             }
 
@@ -74,6 +73,7 @@ struct SearchView: View {
             .onAppear(perform: runSearch)
             .onSubmit(of: .search, runSearch)
             .alert("Failed to load data from the media.ccc.de API", error: $error)
+            .appDestinations()
         }
     }
 
@@ -103,5 +103,6 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(path: .constant([]))
+        .environment(ApiService())
 }

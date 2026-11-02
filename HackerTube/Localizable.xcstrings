@@ -265,6 +265,22 @@
         }
       }
     },
+    "Play" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Abspielen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Afspelen"
+          }
+        }
+      }
+    },
     "Popular" : {
       "comment" : "Heading for the popular talks view and tab.",
       "localizations" : {
@@ -351,6 +367,22 @@
         }
       }
     },
+    "Talk not available" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Vortrag nicht verfügbar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Talk niet beschikbaar"
+          }
+        }
+      }
+    },
     "Watch" : {
       "comment" : "Button to start playback of a talk video.",
       "localizations" : {
@@ -387,5 +419,5 @@
       }
     }
   },
-  "version" : "1.1"
+  "version" : "1.3"
 }

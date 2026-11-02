@@ -29,9 +29,7 @@ private struct ConferencesGridRegular: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(conferences) { conference in
-                NavigationLink {
-                    ConferenceView(conference: conference)
-                } label: {
+                NavigationLink(value: Destination.conference(conference)) {
                     ConferenceCell(conference: conference)
                         #if os(visionOS)
                             .padding()
@@ -61,9 +59,7 @@ private struct ConferencesGridRegular: View {
         var body: some View {
             LazyVGrid(columns: columns, spacing: 64) {
                 ForEach(conferences) { conference in
-                    NavigationLink {
-                        ConferenceView(conference: conference)
-                    } label: {
+                    NavigationLink(value: Destination.conference(conference)) {
                         ConferenceThumbnail(conference: conference)
                             .background(.primary)
                             .hoverEffect(.highlight)

@@ -29,9 +29,7 @@ private struct TalksGridRegular: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(talks) { talk in
-                NavigationLink {
-                    TalkView(talk: talk)
-                } label: {
+                NavigationLink(value: Destination.talk(talk)) {
                     TalkCell(talk: talk)
                         #if os(visionOS)
                             .padding()
@@ -61,9 +59,7 @@ private struct TalksGridRegular: View {
         var body: some View {
             LazyVGrid(columns: columns, spacing: 64) {
                 ForEach(talks) { talk in
-                    NavigationLink {
-                        TalkView(talk: talk)
-                    } label: {
+                    NavigationLink(value: Destination.talk(talk)) {
                         TalkThumbnail(talk: talk)
 
                         Text(talk.title)
