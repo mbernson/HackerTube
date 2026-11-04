@@ -61,9 +61,6 @@ private struct ConferencesGridRegular: View {
                 ForEach(conferences) { conference in
                     NavigationLink(value: Destination.conference(conference)) {
                         ConferenceThumbnail(conference: conference)
-                            // Contrasting foreground so the acronym fallback is visible on the `.primary` background
-                            .foregroundStyle(.background)
-                            .background(.primary)
                             .hoverEffect(.highlight)
 
                         Text(conference.title)
@@ -82,5 +79,7 @@ private struct ConferencesGridRegular: View {
 #endif
 
 #Preview {
-    ConferencesGrid(conferences: [.example])
+    NavigationStack {
+        ConferencesGrid(conferences: [.example])
+    }
 }
