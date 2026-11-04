@@ -56,7 +56,7 @@ struct SVGImageView<Fallback: View>: View {
 
         didFail = false
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession.remoteImages.data(from: url)
             try Task.checkCancellation()
             let rendered = try await rasterizeSVG(data: data, size: size, scale: displayScale)
             cache[key] = rendered
