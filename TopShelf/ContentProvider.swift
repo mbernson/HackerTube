@@ -13,7 +13,7 @@ class ContentProvider: TVTopShelfContentProvider {
 
     override func loadTopShelfContent() async -> TVTopShelfContent? {
         do {
-            let api = MediaCCCApiClient()
+            let api = MediaCCCApiClient(urlSession: .mediaCCCApi)
             async let recentTalks = api.recentTalks()
             let currentYear = Calendar.current.component(.year, from: .now)
             async let popularTalks = api.popularTalks(in: currentYear)

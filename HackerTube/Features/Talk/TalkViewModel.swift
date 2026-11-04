@@ -26,7 +26,7 @@ class TalkViewModel {
     private let mediaAnalyzer: MediaAnalyzer
 
     init() {
-        client = .init()
+        client = .init(urlSession: .mediaCCCApi)
         mediaAnalyzer = .init()
     }
 
