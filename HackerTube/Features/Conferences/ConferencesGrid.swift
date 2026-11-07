@@ -61,7 +61,6 @@ private struct ConferencesGridRegular: View {
                 ForEach(conferences) { conference in
                     NavigationLink(value: Destination.conference(conference)) {
                         ConferenceThumbnail(conference: conference)
-                            .background(.primary)
                             .hoverEffect(.highlight)
 
                         Text(conference.title)
@@ -80,5 +79,7 @@ private struct ConferencesGridRegular: View {
 #endif
 
 #Preview {
-    ConferencesGrid(conferences: [.example])
+    NavigationStack {
+        ConferencesGrid(conferences: [.example])
+    }
 }

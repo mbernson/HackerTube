@@ -20,6 +20,11 @@ struct ConferenceThumbnail: View {
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .aspectRatio(16 / 9, contentMode: .fit)
+            // Conference logos are designed for light backgrounds, so use a fixed light background
+            // regardless of the colour scheme. Forcing the light scheme keeps the acronym fallback
+            // and loading indicator legible on it.
+            .environment(\.colorScheme, .light)
+            .background(Color(white: 0.94))
             .id(id)
     }
 
