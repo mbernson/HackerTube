@@ -54,6 +54,9 @@ struct TalkCell: View {
         }
         .tint(.black)
         .containerShape(.rect(cornerRadius: 24))
+        .contextMenu {
+            ShareLink(item: talk.frontendLink)
+        }
     }
 }
 

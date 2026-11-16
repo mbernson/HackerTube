@@ -56,6 +56,11 @@ struct TalkListItem: View {
                 }
             }
         }
+        #if !os(tvOS)
+        .contextMenu {
+            ShareLink(item: talk.frontendLink)
+        }
+        #endif
     }
 }
 
