@@ -37,6 +37,13 @@ struct TalkView: View {
                 self.error = error
             }
         }
+        #if !os(tvOS)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                ShareLink(item: talk.frontendLink)
+            }
+        }
+        #endif
         .alert("Failed to load data from the media.ccc.de API", error: $error)
         .accessibilityIdentifier("TalkView")
         .accessibilityElement(children: .contain)
