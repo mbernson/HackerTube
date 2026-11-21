@@ -32,6 +32,7 @@ struct TalkThumbnail: View {
                 ProgressView()
             }
         }
+        .backport.asyncImageURLSession(.remoteImages)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .aspectRatio(16 / 9, contentMode: .fit)
         .id(id)

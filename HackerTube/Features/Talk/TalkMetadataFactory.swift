@@ -63,7 +63,7 @@ struct TalkMetadataFactory {
     }
 
     func fetchImageData(forURL url: URL) async throws -> Data? {
-        let (imageData, _) = try await URLSession.shared.data(from: url)
+        let (imageData, _) = try await URLSession.remoteImages.data(from: url)
         return imageData
     }
 }

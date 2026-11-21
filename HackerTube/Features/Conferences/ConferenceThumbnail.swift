@@ -48,6 +48,7 @@ struct ConferenceThumbnail: View {
                     ProgressView()
                 }
             }
+            .backport.asyncImageURLSession(.remoteImages)
         }
     }
 

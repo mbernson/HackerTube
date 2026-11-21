@@ -13,7 +13,7 @@ class ApiService {
     private let client: MediaCCCApiClient
 
     init() {
-        client = .init()
+        client = .init(urlSession: .mediaCCCApi)
     }
 
     // MARK: Conferences

@@ -20,6 +20,7 @@ struct TalkListItem: View {
                 } placeholder: {
                     ProgressView()
                 }
+                .backport.asyncImageURLSession(.remoteImages)
                 .frame(width: width, height: width * (9 / 16))
             }
 
